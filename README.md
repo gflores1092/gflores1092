@@ -43,7 +43,7 @@ Ingeniera industrial con MBA y más de trece años convirtiendo datos en resulta
 
 <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-01.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-03.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-07.webp" height="250"/>
 
-<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-01.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-04.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-07.webp" height="250"/>
+<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-02.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-04.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-07.webp" height="250"/>
 
 Estas fotos son de mis [calendarios 2026](https://missyera.com/recursos/calendario-miss-yera-2026-1/), gratis para mis pollitos 💗
 
