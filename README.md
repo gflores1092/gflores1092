@@ -1,40 +1,67 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=FF69B4&height=200&section=header&text=Miss%20Yera&fontSize=70&fontColor=FFFFFF&animation=fadeIn&fontAlignY=35&desc=Convierto%20datos%20en%20decisiones%20y%20curiosos%20en%20analistas%20%F0%9F%92%97&descSize=18&descAlignY=58" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FFC2E0,50:FF69B4,100:E0218A&height=160&section=header" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=24&duration=2800&pause=900&color=E0218A&center=true&vCenter=true&width=700&lines=Hola+pollitos+%F0%9F%90%A5;No+necesitas+saber+programar%2C+solo+decidirte;Educadora+%C2%B7+Speaker+%C2%B7+Consultora+de+IA;Ense%C3%B1o+IA+y+datos+sin+jerga+y+con+humor" alt="Typing SVG"/>
+<a href="https://missyera.com/"><img src="https://missyera.com/static/media/banner/logo-nav.png" width="300" alt="Miss Yera"/></a>
 
-<img src="https://komarev.com/ghpvc/?username=gflores1092&color=FF69B4&style=for-the-badge&label=POLLITOS+QUE+PASARON+POR+AQU%C3%8D"/>
+<img src="assets/pollito.svg" width="170" alt="Pollito de Miss Yera"/>
+
+<img src="https://readme-typing-svg.demolab.com/?font=Pacifico&size=28&duration=2800&pause=900&color=E0218A&center=true&vCenter=true&width=700&lines=Hola+pollitos;No+necesitas+saber+programar,+solo+decidirte;Ense%C3%B1o+IA+y+datos+sin+jerga+y+con+humor;Educadora,+speaker+y+consultora+de+IA" alt="Typing SVG"/>
+
+<img src="https://komarev.com/ghpvc/?username=gflores1092&color=FF69B4&style=for-the-badge&label=%F0%9F%90%A5+POLLITOS+QUE+PASARON+POR+AQU%C3%8D"/>
+
+🌸🐥🎀💗🩷💗🎀🐥🌸
 
 </div>
-
-<br/>
 
 <div align="center">
 <img src="https://missyera.com/static/media/charlas/charlas-background.jpg" alt="Miss Yera dando una charla sobre inteligencia artificial" width="100%"/>
 </div>
 
-## 🌸 Hola, soy Yera
+## 🎀 Hola, soy Yera
 
-Ingeniera industrial con MBA y más de trece años convirtiendo datos en resultados reales. Fundé **Miss Yera Consultoría** para que la inteligencia artificial deje de dar miedo y empiece a dar resultados, tanto a empresas como a cualquier persona curiosa con ganas de aprender.
+Ingeniera industrial con MBA y más de trece años convirtiendo datos en resultados reales. Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y empiece a dar resultados, tanto a empresas como a cualquier persona curiosa con ganas de aprender.
 
 - 💗 Enseño IA, ciencia de datos y análisis con un enfoque amigable, práctico y con humor
 - 🐥 Más de 200 mil pollitos y pollitas ya aprendieron conmigo en redes
 - 🤖 Implemento soluciones de IA, automatizaciones y dashboards con resultados medibles
 - 🎤 Speaker en conferencias de tecnología, datos y mujeres en STEM
 - 💅 Me reconoces por el pelo rojo, el labial rojo y las uñas rosa
-- 📍 Lima, Perú, con el corazón en toda LATAM
+- 🌸 Lima, Perú, con el corazón en toda LATAM
 
 <div align="center">
 
-*"No necesitas saber programar, solo necesitas decidirte"* 💗
+✨ *"No necesitas saber programar, solo necesitas decidirte"* ✨
+
+🌸🐥🎀💗🩷💗🎀🐥🌸
 
 </div>
 
 ## 📸 Mi mundo en rosa
 
 <div align="center">
-<img src="assets/yera-1.jpg" height="260"/> <img src="assets/yera-2.jpg" height="260"/> <img src="assets/yera-3.jpg" height="260"/>
+
+<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-01.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-03.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-07.webp" height="250"/>
+
+<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-01.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-04.webp" height="250"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-07.webp" height="250"/>
+
+Estas fotos son de mis [calendarios 2026](https://missyera.com/recursos/calendario-miss-yera-2026-1/), gratis para mis pollitos 💗
+
+</div>
+
+## 🧸 Mis juguetes favoritos
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/Python-FF69B4?style=for-the-badge&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/SQL-E0218A?style=for-the-badge&logo=postgresql&logoColor=white"/>
+<img src="https://img.shields.io/badge/Power%20BI-FF8FC8?style=for-the-badge&logo=googleanalytics&logoColor=white"/>
+<img src="https://img.shields.io/badge/Excel-DDA0DD?style=for-the-badge&logo=googlesheets&logoColor=white"/>
+<img src="https://img.shields.io/badge/Machine%20Learning-FF69B4?style=for-the-badge&logo=scikitlearn&logoColor=white"/>
+<img src="https://img.shields.io/badge/IA%20Generativa-E0218A?style=for-the-badge&logo=openai&logoColor=white"/>
+<img src="https://img.shields.io/badge/Claude-FF8FC8?style=for-the-badge&logo=anthropic&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-DDA0DD?style=for-the-badge&logo=git&logoColor=white"/>
+
 </div>
 
 ## 💼 Qué hago
@@ -47,6 +74,7 @@ Ingeniera industrial con MBA y más de trece años convirtiendo datos en resulta
 | 📊 [Análisis predictivo](https://missyera.com/analisis-predictivo-dashboards/) | Dashboards y modelos que convierten data en decisiones |
 | 🎓 [Capacitación en IA](https://missyera.com/capacitacion-ia-empresas/) | Tu equipo aprende haciendo, con casos reales de su industria |
 | 🎤 [Speaker](https://missyera.com/speaker/) | Keynotes y charlas que hacen que la IA parezca fácil |
+| 📷 [Modelo y anfitriona](https://missyera.com/modelo/) | Campañas, editoriales y eventos con mi signature look pelirroja |
 
 ## 💗 Mi ecosistema
 
@@ -55,8 +83,8 @@ Ingeniera industrial con MBA y más de trece años convirtiendo datos en resulta
 | 🌐 [missyera.com](https://missyera.com/) | Mi casa digital, con consultoría, cursos, blog y recursos gratis |
 | 🚀 [Full Day IA](https://missyera.com/cursos/full-day-ia/) | Aprende IA desde cero en un día, 15 herramientas sin programar |
 | 📄 [misscv.com](https://www.misscv.com/) | Crea y analiza tu CV con IA, gratis, con más de 4,500 CVs analizados |
-| 🎮 [polliquest.app](https://polliquest.app/) | Aprende datos y tecnología jugando, como todo buen pollito |
 | ✍️ [Blog](https://missyera.com/blog/) | Guías de IA y datos explicadas sin tecnicismos |
+| 🎁 [Recursos gratis](https://missyera.com/recursos/) | Calendarios, guías y plantillas de regalo para mis pollitos |
 
 ## 💌 Encuéntrame
 
@@ -64,10 +92,10 @@ Ingeniera industrial con MBA y más de trece años convirtiendo datos en resulta
 
 <a href="https://www.tiktok.com/@soymissyera"><img src="https://img.shields.io/badge/TikTok-@soymissyera-FF69B4?style=for-the-badge&logo=tiktok&logoColor=white"/></a>
 <a href="https://www.instagram.com/soymissyera/"><img src="https://img.shields.io/badge/Instagram-@soymissyera-E0218A?style=for-the-badge&logo=instagram&logoColor=white"/></a>
-<a href="https://www.youtube.com/@soymissyera"><img src="https://img.shields.io/badge/YouTube-@soymissyera-FF69B4?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-<a href="https://www.linkedin.com/in/soymissyera/"><img src="https://img.shields.io/badge/LinkedIn-soymissyera-1D334A?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
-<a href="https://x.com/soymissyera"><img src="https://img.shields.io/badge/X-@soymissyera-DDA0DD?style=for-the-badge&logo=x&logoColor=white"/></a>
-<a href="https://missyera.com/"><img src="https://img.shields.io/badge/Web-missyera.com-FF69B4?style=for-the-badge&logo=googlechrome&logoColor=white"/></a>
+<a href="https://www.youtube.com/@soymissyera"><img src="https://img.shields.io/badge/YouTube-@soymissyera-FF8FC8?style=for-the-badge&logo=youtube&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/soymissyera/"><img src="https://img.shields.io/badge/LinkedIn-soymissyera-DDA0DD?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+<a href="https://x.com/soymissyera"><img src="https://img.shields.io/badge/X-@soymissyera-FF69B4?style=for-the-badge&logo=x&logoColor=white"/></a>
+<a href="https://missyera.com/"><img src="https://img.shields.io/badge/Web-missyera.com-E0218A?style=for-the-badge&logo=googlechrome&logoColor=white"/></a>
 
 </div>
 
@@ -92,16 +120,28 @@ Ingeniera industrial con MBA y más de trece años convirtiendo datos en resulta
 
 </div>
 
+## 🐍 La viborita rosa
+
+Una viborita se come mis contribuciones todos los días, porque hasta mis bichos son tiernos.
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/gflores1092/gflores1092/output/snake.svg" alt="Viborita rosa comiendo contribuciones" width="100%"/>
+
+</div>
+
 ---
 
 <div align="center">
 
+<img src="assets/pollito.svg" width="130" alt="Pollito de Miss Yera"/>
+
 **Si llegaste hasta aquí, ya eres pollito honorario** 🐥💗
 
-Hecho con amor, datos y mucho rosa
+Hecho con amor, datos y mucho rosa 🎀
 
 *Chau, chau. Bye, bye.* 💋
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=FF69B4&height=110&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:E0218A,50:FF69B4,100:FFC2E0&height=110&section=footer" width="100%"/>
 
 </div>
