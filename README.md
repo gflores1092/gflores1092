@@ -33,7 +33,7 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 
 <img src="assets/sec-fotos.svg" width="90%" alt="Mi mundo en rosa"/>
 
-<img src="https://missyera.com/static/media/charlas/charlas-background.jpg" alt="Miss Yera dando una charla sobre inteligencia artificial" width="100%"/>
+<img src="https://missyera.com/static/media/charlas/charlas-background.jpg" alt="Miss Yera dando una charla sobre inteligencia artificial" width="25%"/>
 
 <sub>💗 La consultora sobre el escenario</sub>
 
