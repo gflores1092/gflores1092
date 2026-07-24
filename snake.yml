@@ -1,0 +1,30 @@
+name: Viborita rosa
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Generar la viborita rosa
+        uses: Platane/snk@v3
+        with:
+          github_user_name: gflores1092
+          outputs: |
+            dist/snake.svg?color_snake=#E0218A&color_dots=#FFE9F5,#FFC2E0,#FF8FC8,#FF69B4,#E0218A
+
+      - name: Publicar en la rama output
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
