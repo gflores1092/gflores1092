@@ -20,6 +20,7 @@ jobs:
           github_user_name: gflores1092
           outputs: |
             dist/snake.svg?color_snake=#E0218A&color_dots=#FFE9F5,#FFC2E0,#FF8FC8,#FF69B4,#E0218A
+            dist/snake-dark.svg?color_snake=#FF69B4&color_dots=#2B1A24,#5C2545,#A3336F,#E0218A,#FF8FC8
 
       - name: Publicar en la rama output
         uses: crazy-max/ghaction-github-pages@v4
