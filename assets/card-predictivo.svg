@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 220" width="340" height="220">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0.8" y2="1">
+<stop offset="0%" stop-color="#FFFBFD"/><stop offset="55%" stop-color="#FFF5FA"/><stop offset="100%" stop-color="#FFE9F5"/>
+</linearGradient>
+<linearGradient id="ic" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#E0218A"/><stop offset="100%" stop-color="#E0218A"/>
+</linearGradient>
+<style>
+.fl{animation:fl 4s ease-in-out infinite;transform-origin:294px 40px}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-5px) rotate(4deg)}}
+.tw{animation:tw 2.8s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.08)}}
+</style>
+</defs>
+<rect x="5" y="5" width="330" height="210" rx="26" fill="url(#bg)" stroke="#E0218A" stroke-width="3.4"/>
+<rect x="5" y="5" width="330" height="210" rx="26" fill="none" stroke="#FFFBFD" stroke-width="1.2" opacity="0.9"/>
+<path d="M31 5h278" stroke="#E0218A" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+<g transform="translate(30,28)">
+<rect width="58" height="58" rx="19" fill="url(#ic)"/>
+<g transform="translate(8,8) scale(1.75)"><rect x="3.5" y="13" width="4.4" height="8" rx="1.6" fill="#FFFBFD" opacity="0.68"/><rect x="9.8" y="8.5" width="4.4" height="12.5" rx="1.6" fill="#FFFBFD"/><rect x="16.1" y="4" width="4.4" height="17" rx="1.6" fill="#FFFBFD" opacity="0.85"/></g>
+</g>
+<text x="30" y="126" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="25" font-weight="bold" font-style="italic" fill="#E0218A">Análisis predictivo</text>
+<text x="30" y="157" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="16" fill="#1D334A"><tspan x="30" dy="0">Dashboards y modelos que vuelven</tspan><tspan x="30" dy="23">tu data en decisiones.</tspan></text>
+<g class="fl"><g transform="translate(294,32) scale(0.62)"><path d="M0 0 c-6 -8 -18 -5 -18 4 c0 8 10 14 18 19 c8 -5 18 -11 18 -19 c0 -9 -12 -12 -18 -4 z" fill="#E0218A" opacity="0.55"/></g></g>
+<g class="tw" style="transform-origin:300px 186px"><g transform="translate(300,178) scale(0.62)"><path d="M0 0 l3 -10 l3 10 l10 3 l-10 3 l-3 10 l-3 -10 l-10 -3 z" fill="#E0218A" opacity="0.7"/></g></g>
+<g transform="translate(30,196) scale(0.42)"><path d="M-6 6 q-4 20 -14 30 q8 -2 12 -8 q2 12 6 16 q4 -14 2 -34 z" fill="#E0218A" opacity="0.95"/><path d="M6 6 q4 20 14 30 q-8 -2 -12 -8 q-2 12 -6 16 q-4 -14 -2 -34 z" fill="#E0218A" opacity="0.95"/><path d="M0 0 c-10 -15 -30 -12 -30 2 c0 11 10 15 15 18 c-2 -8 0 -14 15 -20 z" fill="#E0218A"/><path d="M4 -2 c10 -15 30 -12 30 2 c0 11 -10 15 -15 18 c2 -8 0 -14 -15 -20 z" fill="#E0218A"/><ellipse cx="1" cy="3" rx="8" ry="7" fill="#E0218A"/></g>
+</svg>

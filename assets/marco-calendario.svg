@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 64" width="900" height="64">
+<defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#FFE9F5"/><stop offset="50%" stop-color="#FFC2E0"/><stop offset="100%" stop-color="#FFE9F5"/></linearGradient></defs>
+<rect x="4" y="10" width="892" height="44" rx="22" fill="url(#m)" stroke="#FF8FC8" stroke-width="2.6"/>
+<text x="450.0" y="40.0" text-anchor="middle" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="22" font-weight="bold" font-style="italic" fill="#E0218A">La modelo, fotos de mis calendarios 2026</text>
+<g transform="translate(46,24.0) scale(0.42)"><path d="M-6 6 q-4 20 -14 30 q8 -2 12 -8 q2 12 6 16 q4 -14 2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M6 6 q4 20 14 30 q-8 -2 -12 -8 q-2 12 -6 16 q-4 -14 -2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M0 0 c-10 -15 -30 -12 -30 2 c0 11 10 15 15 18 c-2 -8 0 -14 15 -20 z" fill="#FF69B4"/><path d="M4 -2 c10 -15 30 -12 30 2 c0 11 -10 15 -15 18 c2 -8 0 -14 -15 -20 z" fill="#FF69B4"/><ellipse cx="1" cy="3" rx="8" ry="7" fill="#E0218A"/></g>
+<g transform="translate(854,24.0) scale(0.42)"><path d="M-6 6 q-4 20 -14 30 q8 -2 12 -8 q2 12 6 16 q4 -14 2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M6 6 q4 20 14 30 q-8 -2 -12 -8 q-2 12 -6 16 q-4 -14 -2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M0 0 c-10 -15 -30 -12 -30 2 c0 11 10 15 15 18 c-2 -8 0 -14 15 -20 z" fill="#FF69B4"/><path d="M4 -2 c10 -15 30 -12 30 2 c0 11 -10 15 -15 18 c2 -8 0 -14 -15 -20 z" fill="#FF69B4"/><ellipse cx="1" cy="3" rx="8" ry="7" fill="#E0218A"/></g>
+</svg>

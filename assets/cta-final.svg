@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="900" height="260">
+<defs>
+<linearGradient id="c" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#FFE9F5"/><stop offset="50%" stop-color="#FFC2E0"/><stop offset="100%" stop-color="#FF8FC8"/></linearGradient>
+<linearGradient id="in" x1="0" y1="0" x2="0.3" y2="1">
+<stop offset="0%" stop-color="#FFFBFD"/><stop offset="100%" stop-color="#FFF5FA"/></linearGradient>
+<style>
+.fl{animation:fl 5s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.tw{animation:tw 2.6s ease-in-out infinite}.tw2{animation:tw 2.6s ease-in-out 1.3s infinite}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.12)}}
+</style>
+</defs>
+<rect x="6" y="6" width="888" height="248" rx="40" fill="url(#c)"/>
+<rect x="24" y="24" width="852" height="212" rx="30" fill="url(#in)" stroke="#FFFBFD" stroke-width="3"/>
+<text x="450.0" y="94" text-anchor="middle" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="34" font-weight="bold" font-style="italic" fill="#E0218A">Tu empresa ya tiene los datos.</text>
+<text x="450.0" y="136" text-anchor="middle" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="34" font-weight="bold" font-style="italic" fill="#FF69B4">Yo pongo la inteligencia y el brillo.</text>
+<text x="450.0" y="180" text-anchor="middle" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="19" fill="#1D334A">Consultoría, automatización y capacitación en IA, sin jerga y con humor.</text>
+<text x="450.0" y="212" text-anchor="middle" font-family="Trebuchet MS, Segoe UI, Verdana, sans-serif" font-size="22" font-weight="bold" fill="#E0218A">missyera.com</text>
+<g class="fl"><g transform="translate(96,120) scale(1.1)"><path d="M-6 6 q-4 20 -14 30 q8 -2 12 -8 q2 12 6 16 q4 -14 2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M6 6 q4 20 14 30 q-8 -2 -12 -8 q-2 12 -6 16 q-4 -14 -2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M0 0 c-10 -15 -30 -12 -30 2 c0 11 10 15 15 18 c-2 -8 0 -14 15 -20 z" fill="#FF69B4"/><path d="M4 -2 c10 -15 30 -12 30 2 c0 11 -10 15 -15 18 c2 -8 0 -14 -15 -20 z" fill="#FF69B4"/><ellipse cx="1" cy="3" rx="8" ry="7" fill="#E0218A"/></g></g>
+<g class="fl"><g transform="translate(804,120) scale(1.1)"><path d="M-6 6 q-4 20 -14 30 q8 -2 12 -8 q2 12 6 16 q4 -14 2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M6 6 q4 20 14 30 q-8 -2 -12 -8 q-2 12 -6 16 q-4 -14 -2 -34 z" fill="#FF69B4" opacity="0.95"/><path d="M0 0 c-10 -15 -30 -12 -30 2 c0 11 10 15 15 18 c-2 -8 0 -14 15 -20 z" fill="#FF69B4"/><path d="M4 -2 c10 -15 30 -12 30 2 c0 11 -10 15 -15 18 c2 -8 0 -14 -15 -20 z" fill="#FF69B4"/><ellipse cx="1" cy="3" rx="8" ry="7" fill="#E0218A"/></g></g>
+<g class="tw" style="transform-origin:64px 60px"><g transform="translate(64,52)"><path d="M0 0 l3 -10 l3 10 l10 3 l-10 3 l-3 10 l-3 -10 l-10 -3 z" fill="#FFFBFD" opacity="0.95"/></g></g>
+<g class="tw2" style="transform-origin:836px 60px"><g transform="translate(836,52)"><path d="M0 0 l3 -10 l3 10 l10 3 l-10 3 l-3 10 l-3 -10 l-10 -3 z" fill="#FFFBFD" opacity="0.95"/></g></g>
+<g class="tw2" style="transform-origin:64px 204px"><g transform="translate(64,196) scale(0.8)"><path d="M0 0 l3 -10 l3 10 l10 3 l-10 3 l-3 10 l-3 -10 l-10 -3 z" fill="#E0218A" opacity="0.7"/></g></g>
+<g class="tw" style="transform-origin:836px 204px"><g transform="translate(836,196) scale(0.8)"><path d="M0 0 l3 -10 l3 10 l10 3 l-10 3 l-3 10 l-3 -10 l-10 -3 z" fill="#E0218A" opacity="0.7"/></g></g>
+</svg>
