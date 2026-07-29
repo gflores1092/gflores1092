@@ -162,7 +162,7 @@ def sep_corazones():
         x = 40 + i * 46
         col = [HOT, ROSE, FLAMINGO, LILAC][i % 4]
         sc = 0.5 if i % 2 else 0.66
-        hearts.append(f'<g transform="translate({x},34) scale({sc})">{HEART.format(c=col, o="0.9")}</g>')
+        hearts.append(f'<g class="cor" transform="translate({x},34) scale({sc})">{HEART.format(c=col, o="0.9")}</g>')
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 70" width="900" height="70">
 <style>
 .beat{{animation:beat 2.4s ease-in-out infinite}}
@@ -170,6 +170,10 @@ def sep_corazones():
 @keyframes beat{{0%,100%{{opacity:.5}}50%{{opacity:1}}}}
 .osc{{animation:osc 3.4s ease-in-out infinite;transform-origin:450px 30px}}
 @keyframes osc{{0%,100%{{transform:rotate(-6deg)}}50%{{transform:rotate(6deg)}}}}
+@media (prefers-color-scheme:dark){{
+.cor path{{fill:{HOT}}}
+.beat,.beat2{{animation-name:beatd}}@keyframes beatd{{0%,100%{{opacity:.72}}50%{{opacity:1}}}}
+}}
 </style>
 <path d="M20 35h860" stroke="{ROSE}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="2 12" opacity="0.85"/>
 <g class="beat">{"".join(hearts[::2])}</g>
@@ -314,7 +318,7 @@ def boton_calendario(edicion, accent=MAGENTA, w=340, h=124):
 
 
 # ---------------------------------------------------------------- ruta de trabajo
-def ruta(pasos, w=900, h=250):
+def ruta(pasos, w=900, h=258):
     """Los cuatro pasos de un proyecto, en burbujas unidas por una linea punteada."""
     cw = w / len(pasos)
     nodos, etiquetas = [], []
@@ -334,13 +338,18 @@ def ruta(pasos, w=900, h=250):
 <g transform="translate({cx:.1f},212) scale(0.32)">{BOW.format(c=accent, d=MAGENTA)}</g>''')
     linea = (f'<path d="M{cw/2:.0f} 74H{w - cw/2:.0f}" stroke="{ROSE}" stroke-width="5" '
              f'stroke-linecap="round" stroke-dasharray="3 16"/>')
+    panel = (f'<rect x="5" y="5" width="{w-10}" height="{h-10}" rx="30" fill="url(#panel)" '
+             f'stroke="{ROSE}" stroke-width="3"/>')
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
 <defs><linearGradient id="paso" x1="0" y1="0" x2="0.6" y2="1">
 <stop offset="0%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{ROSE}"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="0.5" y2="1">
+<stop offset="0%" stop-color="{SNOW}"/><stop offset="65%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{PETAL}"/></linearGradient>
 <style>
 .bob0{{animation:bob 3.6s ease-in-out infinite}}.bob1{{animation:bob 3.6s ease-in-out 1.8s infinite}}
 @keyframes bob{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-6px)}}}}
 </style></defs>
+{panel}
 {linea}
 {"".join(nodos)}
 {"".join(etiquetas)}
@@ -390,7 +399,6 @@ def marco(titulo, w=900, h=64):
 
 if __name__ == "__main__":
     print("cabeceras de seccion")
-    write("sec-impacto.svg", seccion("Mi impacto en números"))
     write("sec-como.svg", seccion("Cómo trabajamos juntas"))
     write("sec-servicios.svg", seccion("Lo que hago por tu empresa"))
 

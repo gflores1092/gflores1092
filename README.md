@@ -2,16 +2,20 @@
 
 <img src="assets/placa-logo.svg" width="92%" alt="Miss Yera"/>
 
+<img src="https://readme-typing-svg.demolab.com/?font=Pacifico&size=27&duration=2800&pause=900&color=E0218A&center=true&vCenter=true&width=720&lines=Consultora+de+IA+y+modelo,+las+dos+soy+yo;No+necesitas+saber+programar,+solo+decidirte;Ense%C3%B1o+IA+y+datos+sin+jerga+y+con+humor" alt="Consultora de IA y modelo, las dos soy yo"/>
+
+<img src="assets/banda-cifras.svg" width="92%" alt="Más de 200 mil pollitos, 13 años de experiencia, más de 40 mil CVs analizados y cero líneas de código que necesitas saber"/>
+
+<a href="https://missyera.com/consultoria-ia/"><img src="https://img.shields.io/badge/%F0%9F%92%96%20Agenda%20tu%20diagn%C3%B3stico-consultor%C3%ADa%20en%20IA-E0218A?style=for-the-badge&labelColor=FFE9F5"/></a>
+<a href="https://missyera.com/cursos/full-day-ia/"><img src="https://img.shields.io/badge/%F0%9F%9A%80%20Aprende%20IA%20en%20un%20d%C3%ADa-Full%20Day%20de%20IA-FF69B4?style=for-the-badge&labelColor=FFE9F5"/></a>
+
+<img src="assets/sep-perlas.svg" width="90%"/>
+
 <img src="assets/pollito.svg" width="180" alt="Pollito de Miss Yera"/>
 
 <img src="assets/banner-frase.svg" width="90%" alt="Bienvenida a mi rinconcito rosa"/>
 
-<img src="https://readme-typing-svg.demolab.com/?font=Pacifico&size=27&duration=2800&pause=900&color=E0218A&center=true&vCenter=true&width=720&lines=Hola+pollitos;Consultora+de+IA+y+modelo,+las+dos+soy+yo;No+necesitas+saber+programar,+solo+decidirte;Ense%C3%B1o+IA+y+datos+sin+jerga+y+con+humor" alt="Typing SVG"/>
-
-<a href="https://missyera.com/"><img src="https://img.shields.io/badge/%F0%9F%8C%B8%20mi%20casa%20digital-missyera.com-E0218A?style=for-the-badge&labelColor=FFE9F5"/></a>
 <img src="https://komarev.com/ghpvc/?username=gflores1092&color=FF69B4&style=for-the-badge&label=%F0%9F%90%A5+POLLITOS+QUE+PASARON+POR+AQU%C3%8D&labelColor=FFE9F5"/>
-
-<img src="assets/sep-perlas.svg" width="90%"/>
 
 <img src="assets/sobre-mi.svg" width="95%" alt="Hola, soy Yera"/>
 
@@ -22,12 +26,6 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 <div align="center">
 
 <img src="assets/sep-corazones.svg" width="90%"/>
-
-<img src="assets/sec-impacto.svg" width="90%" alt="Mi impacto en números"/>
-
-<img src="assets/banda-cifras.svg" width="92%" alt="Más de 200 mil pollitos, 13 años de experiencia, más de 40 mil CVs analizados y cero líneas de código que necesitas saber"/>
-
-<img src="assets/sep-perlas.svg" width="90%"/>
 
 <img src="assets/sec-facetas.svg" width="90%" alt="Mis dos facetas"/>
 
@@ -178,7 +176,10 @@ Todos los días subo algo de IA, datos y vida real. Elige tu favorita 🎀
 
 Una viborita se come mis contribuciones todos los días, porque hasta mis bichos son tiernos 🎀
 
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gflores1092/gflores1092/output/snake-dark.svg"/>
 <img src="https://raw.githubusercontent.com/gflores1092/gflores1092/output/snake.svg" alt="Viborita rosa comiendo contribuciones" width="100%"/>
+</picture>
 
 <img src="assets/sep-corazones.svg" width="90%"/>
 
