@@ -241,6 +241,78 @@ def cifras(tiles, w=900, h=200):
 </svg>'''
 
 
+# ---------------------------------------------------------------- logos de redes
+# Marcas simplificadas, dibujadas en la paleta Miss Yera. Caja de 24x24.
+LOGOS = {
+    "tiktok": lambda c, d: (
+        f'<path d="M14.2 3h3.1c.2 1.6 1 3 2.3 3.9 .8.5 1.7.9 2.6 1v3.1c-1.7-.1-3.3-.6-4.7-1.5v6.6'
+        f'c0 1.5-.5 3-1.5 4.1-1.5 1.8-4 2.5-6.2 1.8-2.4-.7-4.1-2.9-4.2-5.4-.1-2.7 1.8-5.2 4.4-5.8'
+        f'.9-.2 1.8-.2 2.7 0v3.2c-1.4-.5-3 .2-3.5 1.6-.5 1.3.1 2.9 1.4 3.5 1.4.6 3.1 0 3.6-1.5'
+        f'.1-.4.2-.8.2-1.2V3z" fill="{c}"/>'),
+    "instagram": lambda c, d: (
+        f'<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="6" fill="none" stroke="{c}" stroke-width="2.4"/>'
+        f'<circle cx="12" cy="12" r="4.6" fill="none" stroke="{c}" stroke-width="2.4"/>'
+        f'<circle cx="17.6" cy="6.4" r="1.5" fill="{c}"/>'),
+    "youtube": lambda c, d: (
+        f'<rect x="1.6" y="5" width="20.8" height="14" rx="4.6" fill="{c}"/>'
+        f'<path d="M10 8.8 16 12l-6 3.2z" fill="{d}"/>'),
+    "linkedin": lambda c, d: (
+        f'<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="4.6" fill="{c}"/>'
+        f'<circle cx="7.4" cy="7.6" r="1.8" fill="{d}"/>'
+        f'<rect x="5.9" y="10.4" width="3" height="8" fill="{d}"/>'
+        f'<path d="M11.4 18.4v-8h2.9v1.1c.6-.9 1.6-1.4 2.7-1.3 2 0 3.2 1.3 3.2 3.7v4.5h-3v-4c0-1.1-.4-1.8-1.4-1.8'
+        f'-.9 0-1.4.6-1.4 1.8v4z" fill="{d}"/>'),
+    "x": lambda c, d: (
+        f'<path d="M3.2 3h5.4l4.2 5.7L17.9 3h2.9l-6.5 7.6L21.4 21H16l-4.5-6.1L6 21H3.1l7-8.1z" fill="{c}"/>'),
+    "web": lambda c, d: (
+        f'<circle cx="12" cy="12" r="9.4" fill="none" stroke="{c}" stroke-width="2.2"/>'
+        f'<ellipse cx="12" cy="12" rx="4.2" ry="9.4" fill="none" stroke="{c}" stroke-width="2.2"/>'
+        f'<path d="M2.8 9h18.4M2.8 15h18.4" stroke="{c}" stroke-width="2.2"/>'),
+}
+
+
+def chip_red(logo, red, handle, accent=HOT, w=340, h=104):
+    """Chip que va debajo de cada foto en la seccion de redes."""
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0.7" y2="1">
+<stop offset="0%" stop-color="{SNOW}"/><stop offset="60%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{PETAL}"/></linearGradient>
+<linearGradient id="ic" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="{accent}"/><stop offset="100%" stop-color="{MAGENTA}"/></linearGradient>
+<style>.tw{{animation:tw 2.8s ease-in-out infinite;transform-origin:{w-26}px 26px}}
+@keyframes tw{{0%,100%{{opacity:.3;transform:scale(.8)}}50%{{opacity:1;transform:scale(1.1)}}}}</style>
+</defs>
+<rect x="4" y="4" width="{w-8}" height="{h-8}" rx="24" fill="url(#bg)" stroke="{accent}" stroke-width="3.2"/>
+<g transform="translate(22,{(h-54)//2})">
+<rect width="54" height="54" rx="18" fill="url(#ic)"/>
+<g transform="translate(9,9) scale(1.5)">{{glifo}}</g>
+</g>
+<text x="90" y="{h//2-4}" font-family="{FONT}" font-size="15" font-weight="bold" fill="{NAVY}" opacity="0.75">{red}</text>
+<text x="90" y="{h//2+22}" font-family="{FONT}" font-size="21" font-weight="bold" font-style="italic" fill="{MAGENTA}">{handle}</text>
+<g class="tw"><g transform="translate({w-26},20) scale(0.46)">{SPARK.format(c=accent, o="0.8")}</g></g>
+</svg>'''.replace("{glifo}", LOGOS[logo](SNOW, accent))
+
+
+# ---------------------------------------------------------------- boton de calendario
+def boton_calendario(edicion, accent=MAGENTA, w=340, h=124):
+    """Boton bajo la portada de cada calendario."""
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+<stop offset="0%" stop-color="{accent}"/><stop offset="100%" stop-color="{HOT}"/></linearGradient>
+<style>.bob{{animation:bob 3.2s ease-in-out infinite;transform-origin:{w-40}px 62px}}
+@keyframes bob{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-5px)}}}}</style>
+</defs>
+<rect x="4" y="4" width="{w-8}" height="{h-8}" rx="26" fill="url(#bg)"/>
+<rect x="12" y="12" width="{w-24}" height="{h-24}" rx="20" fill="none" stroke="{SNOW}" stroke-width="2" opacity="0.75"/>
+<text x="{w/2}" y="46" text-anchor="middle" font-family="{FONT}" font-size="15" font-weight="bold" fill="{PETAL}">CALENDARIO 2026</text>
+<text x="{w/2}" y="78" text-anchor="middle" font-family="{FONT}" font-size="27" font-weight="bold" font-style="italic" fill="{SNOW}">{edicion}</text>
+<text x="{w/2}" y="104" text-anchor="middle" font-family="{FONT}" font-size="16" fill="{PETAL}">descárgalo gratis</text>
+<g class="bob"><g transform="translate({w-40},50) scale(0.42)">{HEART.format(c=SNOW, o="0.9")}</g></g>
+<g transform="translate(40,50) scale(0.42)">{HEART.format(c=SNOW, o="0.9")}</g>
+</svg>'''
+
+
 # ---------------------------------------------------------------- ruta de trabajo
 def ruta(pasos, w=900, h=250):
     """Los cuatro pasos de un proyecto, en burbujas unidas por una linea punteada."""
@@ -329,7 +401,7 @@ if __name__ == "__main__":
     write("banda-cifras.svg", cifras([
         ("+200 mil", "pollitos y pollitas", "ya aprendieron conmigo"),
         ("13", "años de experiencia", "convirtiendo datos en valor"),
-        ("+4,500", "CVs analizados", "gratis con MissCV"),
+        ("+40 mil", "CVs analizados", "gratis con MissCV"),
         ("0", "líneas de código", "que necesitas saber"),
     ]))
 
@@ -356,6 +428,23 @@ if __name__ == "__main__":
     ]
     for name, ic, t, ls, a, d in eco:
         write(name, card(ic, t, ls, a, d))
+
+    print("chips de redes")
+    redes = [
+        ("chip-tiktok.svg",    "tiktok",    "TikTok",    "@soymissyera", HOT),
+        ("chip-instagram.svg", "instagram", "Instagram", "@soymissyera", MAGENTA),
+        ("chip-youtube.svg",   "youtube",   "YouTube",   "@soymissyera", HOT),
+        ("chip-linkedin.svg",  "linkedin",  "LinkedIn",  "soymissyera",  MAGENTA),
+        ("chip-x.svg",         "x",         "X",         "@soymissyera", HOT),
+        ("chip-web.svg",       "web",       "Mi web",    "missyera.com", MAGENTA),
+    ]
+    for name, lg, red, handle, acc in redes:
+        write(name, chip_red(lg, red, handle, acc))
+
+    print("botones de calendario")
+    write("btn-calendario-1.svg", boton_calendario("Edición 1", MAGENTA))
+    write("btn-calendario-2.svg", boton_calendario("Edición 2", HOT))
+    write("sec-calendarios.svg", seccion("Mis calendarios 2026"))
 
     print("ruta de trabajo")
     write("ruta-trabajo.svg", ruta([
