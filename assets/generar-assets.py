@@ -1,469 +1,426 @@
 #!/usr/bin/env python3
-"""Genera los assets SVG rosados de Miss Yera para el README.
+# -*- coding: utf-8 -*-
+"""Genera los assets del README de Miss Yera en lenguaje editorial rosa.
 
-Correlo con `python3 assets/generar-assets.py` cada vez que quieras cambiar
-un texto, una cifra o un color: reescribe los SVG generados dentro de assets/.
-Los SVG hechos a mano (logo, pollito, banner, facetas, sobre-mi, sec-*) no se tocan.
+Correlo con `python3 assets/generar-assets.py` cada vez que quieras cambiar un
+texto, una cifra, un tono o un color. Reescribe los SVG generados dentro de
+assets/. No toca placa-logo.svg ni pollito.svg, que son piezas de la marca.
+
+La idea del sistema: el rosa tiene rango tonal completo, del nude al borgoña.
+Las secciones alternan tonos claros y oscuros para dar ritmo, en vez de un solo
+rosa plano en todas partes. Sin negro: hasta el tono más profundo sigue siendo
+rosa. El fucsia de la marca queda reservado para acentos, no para fondos.
 """
-import math
 import os
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-# Paleta Miss Yera
-BLUSH   = "#FFF5FA"
-PETAL   = "#FFE9F5"
-ROSE    = "#FFC2E0"
-FLAMINGO= "#FF8FC8"
-HOT     = "#FF69B4"
-MAGENTA = "#E0218A"
-LILAC   = "#DDA0DD"
-NAVY    = "#1D334A"
-SNOW    = "#FFFBFD"
+# ---------------------------------------------------------------- el rosa, completo
+NUDE       = "#F7E7EC"
+BLUSH      = "#F2D9DF"
+ROSA_PALO  = "#DCA9B4"
+ROSA_VIEJO = "#C17C8C"
+FRAMBUESA  = "#9B2F55"
+VINO       = "#6E1435"
+BORGONA    = "#4A0C24"
+HOT        = "#FF69B4"   # el fucsia de la marca, ahora solo como acento
+MAGENTA    = "#E0218A"
+NIEVE      = "#FFFBFD"
 
-FONT = "Trebuchet MS, Segoe UI, Verdana, sans-serif"
+# oro rosa, para filetes y monogramas
+ORO = (("0%", "#F6D9C7"), ("32%", "#E3A886"), ("52%", "#F9E8DB"),
+       ("74%", "#DFA184"), ("100%", "#EFC3AB"))
 
-BOW = ('<path d="M-6 6 q-4 20 -14 30 q8 -2 12 -8 q2 12 6 16 q4 -14 2 -34 z" fill="{c}" opacity="0.95"/>'
-       '<path d="M6 6 q4 20 14 30 q-8 -2 -12 -8 q-2 12 -6 16 q-4 -14 -2 -34 z" fill="{c}" opacity="0.95"/>'
-       '<path d="M0 0 c-10 -15 -30 -12 -30 2 c0 11 10 15 15 18 c-2 -8 0 -14 15 -20 z" fill="{c}"/>'
-       '<path d="M4 -2 c10 -15 30 -12 30 2 c0 11 -10 15 -15 18 c2 -8 0 -14 -15 -20 z" fill="{c}"/>'
-       '<ellipse cx="1" cy="3" rx="8" ry="7" fill="{d}"/>')
+SERIF = "Didot, 'Bodoni MT', 'Playfair Display', Georgia, 'Times New Roman', serif"
+SANS  = "Trebuchet MS, Segoe UI, Verdana, sans-serif"
 
-HEART = ('<path d="M0 0 c-6 -8 -18 -5 -18 4 c0 8 10 14 18 19 c8 -5 18 -11 18 -19 c0 -9 -12 -12 -18 -4 z" '
-         'fill="{c}" opacity="{o}"/>')
-
-SPARK = '<path d="M0 0 l3 -10 l3 10 l10 3 l-10 3 l-3 10 l-3 -10 l-10 -3 z" fill="{c}" opacity="{o}"/>'
-
-
-def write(name, body):
-    path = os.path.join(OUT, name)
-    with open(path, "w", encoding="utf-8") as fh:
-        fh.write(body)
-    print("  ->", name, len(body), "bytes")
+# Los lienzos se mantienen angostos a propósito: cuanto más angosto el lienzo,
+# menos se encoge el texto cuando GitHub escala la imagen en un móvil.
+ANCHO   = 820   # piezas a todo lo ancho
+TARJETA = 380   # tarjetas, dos por fila
 
 
-# ---------------------------------------------------------------- iconos 24x24
-def gear(c, d):
-    teeth = []
-    for i in range(8):
-        a = math.radians(i * 45)
-        x, y = 12 + 9.2 * math.cos(a), 12 + 9.2 * math.sin(a)
-        teeth.append(
-            f'<rect x="{x-2.1:.1f}" y="{y-2.1:.1f}" width="4.2" height="4.2" rx="1.2" '
-            f'fill="{c}" transform="rotate({i*45} {x:.1f} {y:.1f})"/>')
-    return ("".join(teeth) +
-            f'<circle cx="12" cy="12" r="7" fill="{c}"/>'
-            f'<circle cx="12" cy="12" r="3.1" fill="{d}"/>')
+class Tono:
+    """Un escalón del rango tonal, con sus tintas ya resueltas."""
+
+    def __init__(self, nombre, fondo, tinta, suave, acento, filete, oscuro):
+        self.nombre, self.fondo, self.tinta = nombre, fondo, tinta
+        self.suave, self.acento, self.filete, self.oscuro = suave, acento, filete, oscuro
 
 
-ICONS = {
-    "cerebro": lambda c, d: (
-        f'<path d="M11 4.4a3.2 3.2 0 0 0-5 2 3 3 0 0 0-1.4 4.6A3.2 3.2 0 0 0 6 16.4a3.2 3.2 0 0 0 5 2.6z" '
-        f'fill="{c}"/>'
-        f'<path d="M13 4.4a3.2 3.2 0 0 1 5 2 3 3 0 0 1 1.4 4.6A3.2 3.2 0 0 1 18 16.4a3.2 3.2 0 0 1-5 2.6z" '
-        f'fill="{c}" opacity="0.78"/>'
-        f'<g stroke="{d}" fill="none" stroke-width="1.35" stroke-linecap="round">'
-        f'<path d="M12 5.6v12.8"/>'
-        f'<path d="M9.4 7.6c-1.7.5-2.3 2.1-1.4 3.4"/><path d="M8.6 13c-1.4.6-1.8 2.1-1 3.2"/>'
-        f'<path d="M14.6 7.6c1.7.5 2.3 2.1 1.4 3.4"/><path d="M15.4 13c1.4.6 1.8 2.1 1 3.2"/>'
-        f'</g>'),
-    "engranaje": gear,
-    "robot": lambda c, d: (
-        f'<rect x="4" y="8" width="16" height="12" rx="4" fill="{c}"/>'
-        f'<circle cx="9" cy="14" r="2" fill="{d}"/><circle cx="15" cy="14" r="2" fill="{d}"/>'
-        f'<path d="M12 8V4.6" stroke="{c}" stroke-width="2" stroke-linecap="round"/>'
-        f'<circle cx="12" cy="3" r="2.2" fill="{c}"/>'
-        f'<path d="M2.4 12.5v3M21.6 12.5v3" stroke="{c}" stroke-width="2" stroke-linecap="round"/>'),
-    "grafico": lambda c, d: (
-        f'<rect x="3.5" y="13" width="4.4" height="8" rx="1.6" fill="{c}" opacity="0.68"/>'
-        f'<rect x="9.8" y="8.5" width="4.4" height="12.5" rx="1.6" fill="{c}"/>'
-        f'<rect x="16.1" y="4" width="4.4" height="17" rx="1.6" fill="{c}" opacity="0.85"/>'),
-    "birrete": lambda c, d: (
-        f'<path d="M12 3.4 22.4 8.4 12 13.4 1.6 8.4z" fill="{c}"/>'
-        f'<path d="M6 10.6v4.6c0 1.7 2.7 3.2 6 3.2s6-1.5 6-3.2v-4.6" fill="none" stroke="{c}" '
-        f'stroke-width="2.2" stroke-linecap="round"/>'
-        f'<path d="M21.4 9v6" stroke="{c}" stroke-width="1.8" stroke-linecap="round"/>'
-        f'<circle cx="21.4" cy="16" r="1.7" fill="{c}"/>'),
-    "micro": lambda c, d: (
-        f'<rect x="9" y="2.4" width="6" height="11.2" rx="3" fill="{c}"/>'
-        f'<path d="M5.6 11.4a6.4 6.4 0 0 0 12.8 0" fill="none" stroke="{c}" stroke-width="2.2" '
-        f'stroke-linecap="round"/>'
-        f'<path d="M12 17.8v3.4M8.6 21.2h6.8" stroke="{c}" stroke-width="2.2" stroke-linecap="round"/>'),
-    "camara": lambda c, d: (
-        f'<path d="M9.4 5.2h5.2l1.2 2.2H8.2z" fill="{c}"/>'
-        f'<rect x="2.4" y="7" width="19.2" height="13" rx="3.4" fill="{c}"/>'
-        f'<circle cx="12" cy="13.5" r="4.4" fill="{d}"/><circle cx="12" cy="13.5" r="2.1" fill="{c}"/>'),
-    "globo": lambda c, d: (
-        f'<circle cx="12" cy="12" r="9.2" fill="{c}"/>'
-        f'<ellipse cx="12" cy="12" rx="4" ry="9.2" fill="none" stroke="{d}" stroke-width="1.4"/>'
-        f'<path d="M3.2 9.2h17.6M3.2 14.8h17.6" stroke="{d}" stroke-width="1.4"/>'),
-    "cohete": lambda c, d: (
-        f'<path d="M12 2.2c3.4 2.6 5.2 6.4 5.2 10.4L12 17 6.8 12.6c0-4 1.8-7.8 5.2-10.4z" fill="{c}"/>'
-        f'<circle cx="12" cy="9.4" r="2.2" fill="{d}"/>'
-        f'<path d="M6.8 12.6 4 16.4l3.8-.8zM17.2 12.6 20 16.4l-3.8-.8z" fill="{c}" opacity="0.75"/>'
-        f'<path d="M10.4 18.2c.6 2 1.6 3.4 1.6 3.4s1-1.4 1.6-3.4z" fill="{c}" opacity="0.6"/>'),
-    "cv": lambda c, d: (
-        f'<rect x="4.4" y="2.6" width="15.2" height="18.8" rx="3" fill="{c}"/>'
-        f'<circle cx="12" cy="9" r="2.7" fill="{d}"/>'
-        f'<path d="M7.6 16.6c0-2.4 2-3.8 4.4-3.8s4.4 1.4 4.4 3.8z" fill="{d}"/>'
-        f'<path d="M8 19.2h8" stroke="{d}" stroke-width="1.5" stroke-linecap="round"/>'),
-    "pluma": lambda c, d: (
-        f'<path d="M20.4 3.4C13.8 4 8.4 7 6.4 13.2c-.7 2.1-.7 4-.5 5.3 1.2-2.9 3.2-5.2 6.6-6.9'
-        f'-2.4 1.9-4.2 4.3-5.1 7.4 5.8.6 10.2-2.4 11.9-7.6.9-2.7 1.1-5.6 1.1-8z" fill="{c}"/>'
-        f'<path d="M6 21.4c.4-1.6 1-3 1.8-4.3" stroke="{c}" stroke-width="1.8" stroke-linecap="round"/>'),
-    "regalo": lambda c, d: (
-        f'<rect x="2.8" y="9.6" width="18.4" height="11.6" rx="2.6" fill="{c}"/>'
-        f'<rect x="1.8" y="6" width="20.4" height="4.6" rx="2" fill="{c}" opacity="0.8"/>'
-        f'<path d="M12 6v15.2" stroke="{d}" stroke-width="2.2"/>'
-        f'<path d="M12 6C10.4 2.4 5.6 2.6 6.4 5.4 6.9 7 9.6 6.4 12 6zM12 6c1.6-3.6 6.4-3.4 5.6-.6'
-        f'-.5 1.6-3.2 1-5.6.6z" fill="{c}"/>'),
-}
+T_NUDE = Tono("nude",      NUDE,      VINO, ROSA_VIEJO, MAGENTA, ROSA_PALO,  False)
+T_FRAM = Tono("frambuesa", FRAMBUESA, NUDE, BLUSH,      HOT,     "url(#oro)", True)
+T_VINO = Tono("vino",      VINO,      NUDE, BLUSH,      HOT,     "url(#oro)", True)
+T_BORG = Tono("borgona",   BORGONA,   NUDE, BLUSH,      HOT,     "url(#oro)", True)
 
 
-# ---------------------------------------------------------------- tarjetas
-def card(icon, title, lines, accent=HOT, deep=MAGENTA, w=340, h=220):
-    """Tarjeta rosada con icono, titulo y descripcion."""
-    tspans = "".join(
-        f'<tspan x="30" dy="{0 if i == 0 else 23}">{ln}</tspan>' for i, ln in enumerate(lines))
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>
-<linearGradient id="bg" x1="0" y1="0" x2="0.8" y2="1">
-<stop offset="0%" stop-color="{SNOW}"/><stop offset="55%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{PETAL}"/>
-</linearGradient>
-<linearGradient id="ic" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="{accent}"/><stop offset="100%" stop-color="{deep}"/>
-</linearGradient>
-<style>
-.fl{{animation:fl 4s ease-in-out infinite;transform-origin:{w-46}px 40px}}
-@keyframes fl{{0%,100%{{transform:translateY(0) rotate(-4deg)}}50%{{transform:translateY(-5px) rotate(4deg)}}}}
-.tw{{animation:tw 2.8s ease-in-out infinite}}
-@keyframes tw{{0%,100%{{opacity:.35;transform:scale(.8)}}50%{{opacity:1;transform:scale(1.08)}}}}
-</style>
-</defs>
-<rect x="5" y="5" width="{w-10}" height="{h-10}" rx="26" fill="url(#bg)" stroke="{accent}" stroke-width="3.4"/>
-<rect x="5" y="5" width="{w-10}" height="{h-10}" rx="26" fill="none" stroke="{SNOW}" stroke-width="1.2" opacity="0.9"/>
-<path d="M31 5h{w-62}" stroke="{deep}" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
-<g transform="translate(30,28)">
-<rect width="58" height="58" rx="19" fill="url(#ic)"/>
-<g transform="translate(8,8) scale(1.75)">{ICONS[icon](SNOW, accent)}</g>
-</g>
-<text x="30" y="126" font-family="{FONT}" font-size="25" font-weight="bold" font-style="italic" fill="{deep}">{title}</text>
-<text x="30" y="157" font-family="{FONT}" font-size="16" fill="{NAVY}">{tspans}</text>
-<g class="fl"><g transform="translate({w-46},32) scale(0.62)">{HEART.format(c=accent, o="0.55")}</g></g>
-<g class="tw" style="transform-origin:{w-40}px {h-34}px"><g transform="translate({w-40},{h-42}) scale(0.62)">{SPARK.format(c=deep, o="0.7")}</g></g>
-<g transform="translate(30,{h-24}) scale(0.42)">{BOW.format(c=accent, d=deep)}</g>
-</svg>'''
+def escribir(nombre, cuerpo):
+    with open(os.path.join(OUT, nombre), "w", encoding="utf-8") as fh:
+        fh.write(cuerpo)
+    print("  ->", nombre)
 
 
-# ---------------------------------------------------------------- separadores
-def sep_corazones():
-    hearts = []
-    for i in range(19):
-        x = 40 + i * 46
-        col = [HOT, ROSE, FLAMINGO, LILAC][i % 4]
-        sc = 0.5 if i % 2 else 0.66
-        hearts.append(f'<g class="cor" transform="translate({x},34) scale({sc})">{HEART.format(c=col, o="0.9")}</g>')
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 70" width="900" height="70">
-<style>
-.beat{{animation:beat 2.4s ease-in-out infinite}}
-.beat2{{animation:beat 2.4s ease-in-out 1.2s infinite}}
-@keyframes beat{{0%,100%{{opacity:.5}}50%{{opacity:1}}}}
-.osc{{animation:osc 3.4s ease-in-out infinite;transform-origin:450px 30px}}
-@keyframes osc{{0%,100%{{transform:rotate(-6deg)}}50%{{transform:rotate(6deg)}}}}
-@media (prefers-color-scheme:dark){{
-.cor path{{fill:{HOT}}}
-.beat,.beat2{{animation-name:beatd}}@keyframes beatd{{0%,100%{{opacity:.72}}50%{{opacity:1}}}}
-}}
-</style>
-<path d="M20 35h860" stroke="{ROSE}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="2 12" opacity="0.85"/>
-<g class="beat">{"".join(hearts[::2])}</g>
-<g class="beat2">{"".join(hearts[1::2])}</g>
-<g class="osc"><g transform="translate(450,22) scale(1.05)">{BOW.format(c=HOT, d=MAGENTA)}</g></g>
-</svg>'''
+# ---------------------------------------------------------------- motivos
+def defs_oro():
+    paradas = "".join(f'<stop offset="{o}" stop-color="{c}"/>' for o, c in ORO)
+    return f'<linearGradient id="oro" x1="0" y1="0" x2="1" y2="1">{paradas}</linearGradient>'
 
 
-# ---------------------------------------------------------------- cabeceras
-def seccion(titulo, emoji_hint=None, w=900, h=110):
-    """Cabecera de seccion en el mismo estilo que las sec-*.svg existentes."""
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="{PETAL}"/><stop offset="55%" stop-color="{ROSE}"/><stop offset="100%" stop-color="{FLAMINGO}"/></linearGradient>
-<style>.b{{animation:b 2.6s ease-in-out infinite}}.b2{{animation:b 2.6s ease-in-out 1.3s infinite}}
-@keyframes b{{0%,100%{{opacity:.3;transform:scale(.85)}}50%{{opacity:1;transform:scale(1.1)}}}}
-.sw{{animation:sw 3.4s ease-in-out infinite;transform-origin:78px 55px}}@keyframes sw{{0%,100%{{transform:rotate(-6deg)}}50%{{transform:rotate(6deg)}}}}</style></defs>
-<g transform="translate(0,8)"><path d="{_scallop()}" fill="url(#g)" stroke="{ROSE}" stroke-width="3"/></g>
-{_pearls()}
-<g class="sw"><g transform="translate(80,52) scale(0.9)">{BOW.format(c=HOT, d=MAGENTA)}</g></g>
-<text x="474" y="67" text-anchor="middle" font-family="{FONT}" font-size="36" font-style="italic" font-weight="bold" fill="{MAGENTA}">{titulo}</text>
-<g class="b" style="transform-origin:805px 49px"><g transform="translate(805,41) scale(1)">{SPARK.format(c="#FFFFFF", o="0.95")}</g></g>
-<g class="b2" style="transform-origin:842px 65px"><g transform="translate(842,59) scale(0.8)">{SPARK.format(c=MAGENTA, o="0.8")}</g></g>
-<g transform="translate(760,39) scale(0.8)">{HEART.format(c=HOT, o="0.5")}</g>
-</svg>'''
+def seda(t):
+    """Viñeta suave: centro apenas más claro, bordes al tono pleno.
+
+    Antes esto era un degradado diagonal que se leía como una mancha. Una
+    viñeta radial da profundidad sin parecer un artefacto de compresión.
+    """
+    claro = NIEVE if not t.oscuro else FRAMBUESA
+    return (f'<radialGradient id="seda" cx="0.5" cy="0.42" r="0.78">'
+            f'<stop offset="0%" stop-color="{claro}" stop-opacity="{0.16 if t.oscuro else 0.5}"/>'
+            f'<stop offset="70%" stop-color="{claro}" stop-opacity="0"/>'
+            f'<stop offset="100%" stop-color="{BORGONA}" stop-opacity="{0.14 if t.oscuro else 0.04}"/>'
+            f'</radialGradient>')
 
 
-def _scallop():
-    top = "M14 14 " + "a14 14 0 0 1 28 0 " * 31
-    bottom = "L882 80 " + "a14 14 0 0 1 -28 0 " * 31
-    return top + bottom + "Z"
+def lazo(color, ancho=1.5):
+    """El lacito de siempre, pero de línea fina en vez de relleno macizo."""
+    return (f'<g fill="none" stroke="{color}" stroke-width="{ancho}" '
+            f'stroke-linecap="round" stroke-linejoin="round">'
+            f'<path d="M0 0 C-7 -13 -28 -11 -28 2 C-28 12 -13 12 0 2"/>'
+            f'<path d="M0 0 C7 -13 28 -11 28 2 C28 12 13 12 0 2"/>'
+            f'<path d="M-3 4 C-7 17 -11 24 -17 31"/>'
+            f'<path d="M3 4 C7 17 11 24 17 31"/>'
+            f'<ellipse cx="0" cy="1.5" rx="4.6" ry="4"/></g>')
 
 
-def _pearls():
-    return "".join(
-        f'<circle cx="{60 + i*26}" cy="89" r="4" fill="{SNOW}" stroke="{ROSE}" stroke-width="1.6"/>'
-        for i in range(30))
+def encaje(x0, x1, y, color, paso=26, alto=9, opacidad=0.9):
+    """Borde de encaje: arcos finos con un puntito colgando de cada uno."""
+    arcos, puntos = [], []
+    x = x0
+    while x + paso <= x1:
+        arcos.append(f"M{x} {y} q{paso/2} {alto} {paso} 0")
+        puntos.append(f'<circle cx="{x + paso/2:.1f}" cy="{y + alto*0.78:.1f}" r="1.5" fill="{color}"/>')
+        x += paso
+    return (f'<g opacity="{opacidad}"><path d="{" ".join(arcos)}" fill="none" stroke="{color}" '
+            f'stroke-width="1.2"/>{"".join(puntos)}</g>')
+
+
+def monograma(x, y, color, escala=1.0, opacidad=1.0):
+    return (f'<text x="{x}" y="{y}" text-anchor="middle" font-family="{SERIF}" '
+            f'font-size="{16*escala:.0f}" letter-spacing="{3.4*escala:.1f}" '
+            f'fill="{color}" opacity="{opacidad}">MY</text>')
+
+
+def rotulo(x, y, texto, color, tam=12, esp=4.4):
+    """Rótulo en versalitas espaciadas, el gesto editorial por excelencia."""
+    return (f'<text x="{x}" y="{y}" text-anchor="middle" font-family="{SANS}" '
+            f'font-size="{tam}" letter-spacing="{esp}" fill="{color}">{texto.upper()}</text>')
+
+
+def filete(x0, x1, y, t, grosor=1.3):
+    return f'<path d="M{x0:.0f} {y:.0f}H{x1:.0f}" stroke="{t.filete}" stroke-width="{grosor}"/>'
+
+
+def marco_base(w, h, t):
+    """Fondo de satén más filete interior: la caja común a todas las piezas."""
+    return (f'<rect width="{w}" height="{h}" fill="{t.fondo}"/>'
+            f'<rect width="{w}" height="{h}" fill="url(#seda)"/>'
+            f'<rect x="13" y="13" width="{w-26}" height="{h-26}" '
+            f'fill="none" stroke="{t.filete}" stroke-width="1.3"/>')
+
+
+def envoltura(w, h, cuerpo, extra_defs=""):
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" '
+            f'width="{w}" height="{h}"><defs>{defs_oro()}{extra_defs}</defs>{cuerpo}</svg>')
+
+
+# ---------------------------------------------------------------- cabecera de sección
+def seccion(titulo, t, w=ANCHO, h=146):
+    c = (marco_base(w, h, t) +
+         encaje(40, w - 40, h - 30, t.filete, opacidad=0.5) +
+         f'<text x="{w/2}" y="{h/2+20}" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="40" letter-spacing="2.4" fill="{t.tinta}">{titulo}</text>' +
+         filete(62, w/2 - 240, h/2 + 8, t) +
+         filete(w/2 + 240, w - 62, h/2 + 8, t) +
+         f'<g transform="translate({w/2},36) scale(0.5)">{lazo(t.acento, 2.5)}</g>' +
+         '')
+    return envoltura(w, h, c, seda(t))
+
+
+# ---------------------------------------------------------------- tarjeta
+def tarjeta(rotulo_txt, titulo, lineas, t, w=TARJETA, h=252):
+    cuerpo = "".join(
+        f'<text x="{w/2}" y="{162 + i*28}" text-anchor="middle" font-family="{SANS}" '
+        f'font-size="19" fill="{t.tinta}" opacity="0.88">{ln}</text>'
+        for i, ln in enumerate(lineas))
+    c = (marco_base(w, h, t) +
+         rotulo(w/2, 62, rotulo_txt, t.acento, 12.5, 4.2) +
+         f'<text x="{w/2}" y="116" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="31" letter-spacing="1.1" fill="{t.tinta}">{titulo}</text>' +
+         filete(w/2 - 34, w/2 + 34, 134, t) + cuerpo)
+    return envoltura(w, h, c, seda(t))
 
 
 # ---------------------------------------------------------------- banda de cifras
-def cifras(tiles, w=900, h=200):
-    """Tarjetas de cifras. Sin animar la opacidad del bloque entero: eso apagaba
-    los numeros. Solo parpadean los brillitos decorativos."""
-    cw = (w - 40) / len(tiles)
-    cells = []
-    for i, (num, l1, l2) in enumerate(tiles):
-        x0 = 20 + cw * i + 8
-        tw = cw - 16
-        cx = x0 + tw / 2
-        accent = [MAGENTA, HOT, MAGENTA, HOT][i % 4]
-        cells.append(f'''
-<g>
-<rect x="{x0:.1f}" y="18" width="{tw:.1f}" height="{h-42}" rx="26" fill="url(#tile)" stroke="{accent}" stroke-width="3.2"/>
-<path d="M{x0+26:.1f} 18h{tw-52:.1f}" stroke="{accent}" stroke-width="5" stroke-linecap="round"/>
-<text x="{cx:.1f}" y="84" text-anchor="middle" font-family="{FONT}" font-size="42" font-weight="bold" fill="{accent}">{num}</text>
-<text x="{cx:.1f}" y="114" text-anchor="middle" font-family="{FONT}" font-size="15.5" font-weight="bold" fill="{NAVY}">{l1}</text>
-<text x="{cx:.1f}" y="136" text-anchor="middle" font-family="{FONT}" font-size="13.5" fill="{NAVY}" opacity="0.78">{l2}</text>
-<g class="tw{i % 2}" style="transform-origin:{x0+tw-26:.1f}px 42px"><g transform="translate({x0+tw-26:.1f},36) scale(0.5)">{SPARK.format(c=accent, o="0.75")}</g></g>
-<g transform="translate({cx:.1f},{h-42}) scale(0.36)">{BOW.format(c=accent, d=MAGENTA)}</g>
-</g>''')
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs><linearGradient id="tile" x1="0" y1="0" x2="0.4" y2="1">
-<stop offset="0%" stop-color="{SNOW}"/><stop offset="60%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{PETAL}"/></linearGradient>
-<style>
-.tw0{{animation:tw 2.8s ease-in-out infinite}}.tw1{{animation:tw 2.8s ease-in-out 1.4s infinite}}
-@keyframes tw{{0%,100%{{opacity:.3;transform:scale(.8)}}50%{{opacity:1;transform:scale(1.1)}}}}
-</style></defs>
-{"".join(cells)}
-</svg>'''
-
-
-# ---------------------------------------------------------------- logos de redes
-# Marcas simplificadas, dibujadas en la paleta Miss Yera. Caja de 24x24.
-LOGOS = {
-    "tiktok": lambda c, d: (
-        f'<path d="M14.2 3h3.1c.2 1.6 1 3 2.3 3.9 .8.5 1.7.9 2.6 1v3.1c-1.7-.1-3.3-.6-4.7-1.5v6.6'
-        f'c0 1.5-.5 3-1.5 4.1-1.5 1.8-4 2.5-6.2 1.8-2.4-.7-4.1-2.9-4.2-5.4-.1-2.7 1.8-5.2 4.4-5.8'
-        f'.9-.2 1.8-.2 2.7 0v3.2c-1.4-.5-3 .2-3.5 1.6-.5 1.3.1 2.9 1.4 3.5 1.4.6 3.1 0 3.6-1.5'
-        f'.1-.4.2-.8.2-1.2V3z" fill="{c}"/>'),
-    "instagram": lambda c, d: (
-        f'<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="6" fill="none" stroke="{c}" stroke-width="2.4"/>'
-        f'<circle cx="12" cy="12" r="4.6" fill="none" stroke="{c}" stroke-width="2.4"/>'
-        f'<circle cx="17.6" cy="6.4" r="1.5" fill="{c}"/>'),
-    "youtube": lambda c, d: (
-        f'<rect x="1.6" y="5" width="20.8" height="14" rx="4.6" fill="{c}"/>'
-        f'<path d="M10 8.8 16 12l-6 3.2z" fill="{d}"/>'),
-    "linkedin": lambda c, d: (
-        f'<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="4.6" fill="{c}"/>'
-        f'<circle cx="7.4" cy="7.6" r="1.8" fill="{d}"/>'
-        f'<rect x="5.9" y="10.4" width="3" height="8" fill="{d}"/>'
-        f'<path d="M11.4 18.4v-8h2.9v1.1c.6-.9 1.6-1.4 2.7-1.3 2 0 3.2 1.3 3.2 3.7v4.5h-3v-4c0-1.1-.4-1.8-1.4-1.8'
-        f'-.9 0-1.4.6-1.4 1.8v4z" fill="{d}"/>'),
-    "x": lambda c, d: (
-        f'<path d="M3.2 3h5.4l4.2 5.7L17.9 3h2.9l-6.5 7.6L21.4 21H16l-4.5-6.1L6 21H3.1l7-8.1z" fill="{c}"/>'),
-    "web": lambda c, d: (
-        f'<circle cx="12" cy="12" r="9.4" fill="none" stroke="{c}" stroke-width="2.2"/>'
-        f'<ellipse cx="12" cy="12" rx="4.2" ry="9.4" fill="none" stroke="{c}" stroke-width="2.2"/>'
-        f'<path d="M2.8 9h18.4M2.8 15h18.4" stroke="{c}" stroke-width="2.2"/>'),
-}
-
-
-def chip_red(logo, red, handle, accent=HOT, w=340, h=104):
-    """Chip que va debajo de cada foto en la seccion de redes."""
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>
-<linearGradient id="bg" x1="0" y1="0" x2="0.7" y2="1">
-<stop offset="0%" stop-color="{SNOW}"/><stop offset="60%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{PETAL}"/></linearGradient>
-<linearGradient id="ic" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="{accent}"/><stop offset="100%" stop-color="{MAGENTA}"/></linearGradient>
-<style>.tw{{animation:tw 2.8s ease-in-out infinite;transform-origin:{w-26}px 26px}}
-@keyframes tw{{0%,100%{{opacity:.3;transform:scale(.8)}}50%{{opacity:1;transform:scale(1.1)}}}}</style>
-</defs>
-<rect x="4" y="4" width="{w-8}" height="{h-8}" rx="24" fill="url(#bg)" stroke="{accent}" stroke-width="3.2"/>
-<g transform="translate(22,{(h-54)//2})">
-<rect width="54" height="54" rx="18" fill="url(#ic)"/>
-<g transform="translate(9,9) scale(1.5)">{{glifo}}</g>
-</g>
-<text x="90" y="{h//2-4}" font-family="{FONT}" font-size="15" font-weight="bold" fill="{NAVY}" opacity="0.75">{red}</text>
-<text x="90" y="{h//2+22}" font-family="{FONT}" font-size="21" font-weight="bold" font-style="italic" fill="{MAGENTA}">{handle}</text>
-<g class="tw"><g transform="translate({w-26},20) scale(0.46)">{SPARK.format(c=accent, o="0.8")}</g></g>
-</svg>'''.replace("{glifo}", LOGOS[logo](SNOW, accent))
-
-
-# ---------------------------------------------------------------- boton de calendario
-def boton_calendario(edicion, accent=MAGENTA, w=340, h=124):
-    """Boton bajo la portada de cada calendario."""
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>
-<linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
-<stop offset="0%" stop-color="{accent}"/><stop offset="100%" stop-color="{HOT}"/></linearGradient>
-<style>.bob{{animation:bob 3.2s ease-in-out infinite;transform-origin:{w-40}px 62px}}
-@keyframes bob{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-5px)}}}}</style>
-</defs>
-<rect x="4" y="4" width="{w-8}" height="{h-8}" rx="26" fill="url(#bg)"/>
-<rect x="12" y="12" width="{w-24}" height="{h-24}" rx="20" fill="none" stroke="{SNOW}" stroke-width="2" opacity="0.75"/>
-<text x="{w/2}" y="46" text-anchor="middle" font-family="{FONT}" font-size="15" font-weight="bold" fill="{PETAL}">CALENDARIO 2026</text>
-<text x="{w/2}" y="78" text-anchor="middle" font-family="{FONT}" font-size="27" font-weight="bold" font-style="italic" fill="{SNOW}">{edicion}</text>
-<text x="{w/2}" y="104" text-anchor="middle" font-family="{FONT}" font-size="16" fill="{PETAL}">descárgalo gratis</text>
-<g class="bob"><g transform="translate({w-40},50) scale(0.42)">{HEART.format(c=SNOW, o="0.9")}</g></g>
-<g transform="translate(40,50) scale(0.42)">{HEART.format(c=SNOW, o="0.9")}</g>
-</svg>'''
+def cifras(datos, w=ANCHO, h=186):
+    cw = (w - 52) / len(datos)
+    celdas = ""
+    for i, (num, etiqueta) in enumerate(datos):
+        cx = 26 + cw * i + cw / 2
+        if i:
+            celdas += (f'<path d="M{26 + cw*i:.1f} 50V{h-50}" stroke="{T_VINO.filete}" '
+                       f'stroke-width="1" opacity="0.55"/>')
+        celdas += (
+            f'<text x="{cx:.1f}" y="104" text-anchor="middle" font-family="{SERIF}" '
+            f'font-size="54" fill="{T_VINO.tinta}">{num}</text>'
+            + rotulo(cx, 140, etiqueta, T_VINO.suave, 12.5, 2.6))
+    c = marco_base(w, h, T_VINO) + celdas
+    return envoltura(w, h, c, seda(T_VINO))
 
 
 # ---------------------------------------------------------------- ruta de trabajo
-def ruta(pasos, w=900, h=258):
-    """Los cuatro pasos de un proyecto, en burbujas unidas por una linea punteada."""
-    cw = w / len(pasos)
-    nodos, etiquetas = [], []
-    for i, (titulo, l1, l2) in enumerate(pasos):
-        cx = cw * i + cw / 2
-        accent = [MAGENTA, HOT, FLAMINGO, MAGENTA][i % 4]
-        nodos.append(f'''
-<g class="bob{i % 2}" style="transform-origin:{cx:.1f}px 74px">
-<circle cx="{cx:.1f}" cy="74" r="42" fill="{SNOW}" stroke="{accent}" stroke-width="4"/>
-<circle cx="{cx:.1f}" cy="74" r="34" fill="url(#paso)" opacity="0.55"/>
-<text x="{cx:.1f}" y="90" text-anchor="middle" font-family="{FONT}" font-size="40" font-weight="bold" fill="{accent}">{i+1}</text>
-</g>''')
-        etiquetas.append(f'''
-<text x="{cx:.1f}" y="148" text-anchor="middle" font-family="{FONT}" font-size="20" font-weight="bold" font-style="italic" fill="{accent}">{titulo}</text>
-<text x="{cx:.1f}" y="176" text-anchor="middle" font-family="{FONT}" font-size="14.5" fill="{NAVY}">{l1}</text>
-<text x="{cx:.1f}" y="196" text-anchor="middle" font-family="{FONT}" font-size="14.5" fill="{NAVY}">{l2}</text>
-<g transform="translate({cx:.1f},212) scale(0.32)">{BOW.format(c=accent, d=MAGENTA)}</g>''')
-    linea = (f'<path d="M{cw/2:.0f} 74H{w - cw/2:.0f}" stroke="{ROSE}" stroke-width="5" '
-             f'stroke-linecap="round" stroke-dasharray="3 16"/>')
-    panel = (f'<rect x="5" y="5" width="{w-10}" height="{h-10}" rx="30" fill="url(#panel)" '
-             f'stroke="{ROSE}" stroke-width="3"/>')
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs><linearGradient id="paso" x1="0" y1="0" x2="0.6" y2="1">
-<stop offset="0%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{ROSE}"/></linearGradient>
-<linearGradient id="panel" x1="0" y1="0" x2="0.5" y2="1">
-<stop offset="0%" stop-color="{SNOW}"/><stop offset="65%" stop-color="{BLUSH}"/><stop offset="100%" stop-color="{PETAL}"/></linearGradient>
-<style>
-.bob0{{animation:bob 3.6s ease-in-out infinite}}.bob1{{animation:bob 3.6s ease-in-out 1.8s infinite}}
-@keyframes bob{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-6px)}}}}
-</style></defs>
-{panel}
-{linea}
-{"".join(nodos)}
-{"".join(etiquetas)}
-</svg>'''
+def ruta(pasos, w=ANCHO, h=244):
+    cw = (w - 52) / len(pasos)
+    nodos = ""
+    for i, (titulo, linea) in enumerate(pasos):
+        cx = 26 + cw * i + cw / 2
+        nodos += (
+            f'<circle cx="{cx:.1f}" cy="88" r="34" fill="none" stroke="{T_NUDE.filete}" stroke-width="1.4"/>'
+            f'<circle cx="{cx:.1f}" cy="88" r="27" fill="{NIEVE}" opacity="0.6"/>'
+            f'<text x="{cx:.1f}" y="101" text-anchor="middle" font-family="{SERIF}" '
+            f'font-size="34" fill="{T_NUDE.tinta}">{i+1}</text>'
+            f'<text x="{cx:.1f}" y="162" text-anchor="middle" font-family="{SERIF}" '
+            f'font-size="25" letter-spacing="0.8" fill="{T_NUDE.tinta}">{titulo}</text>'
+            + rotulo(cx, 196, linea, T_NUDE.suave, 12.5, 2.4))
+    c = (marco_base(w, h, T_NUDE) +
+         f'<path d="M{26+cw/2:.0f} 88H{w-26-cw/2:.0f}" stroke="{T_NUDE.filete}" '
+         f'stroke-width="1.2" stroke-dasharray="1 9"/>' + nodos)
+    return envoltura(w, h, c, seda(T_NUDE))
+
+
+# ---------------------------------------------------------------- chip de red
+def chip(red, handle, t, w=TARJETA, h=114):
+    c = (marco_base(w, h, t) +
+         rotulo(w/2, h/2 - 10, red, t.acento, 12.5, 4.2) +
+         f'<text x="{w/2}" y="{h/2+26}" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="26" letter-spacing="0.6" fill="{t.tinta}">{handle}</text>')
+    return envoltura(w, h, c, seda(t))
+
+
+# ---------------------------------------------------------------- botón
+def boton(edicion, t, w=TARJETA, h=128):
+    c = (marco_base(w, h, t) +
+         rotulo(w/2, 50, "calendario 2026", t.acento, 12.5, 4.2) +
+         f'<text x="{w/2}" y="90" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="30" letter-spacing="1" fill="{t.tinta}">{edicion}</text>' +
+         rotulo(w/2, 112, "descárgalo gratis", t.suave, 12, 3.2))
+    return envoltura(w, h, c, seda(t))
+
+
+# ---------------------------------------------------------------- pie editorial
+def pie(texto, t, w=ANCHO, h=72):
+    c = (f'<rect width="{w}" height="{h}" fill="{t.fondo}"/>'
+         f'<rect width="{w}" height="{h}" fill="url(#seda)"/>' +
+         filete(40, w/2 - 250, h/2, t) + filete(w/2 + 250, w - 40, h/2, t) +
+         rotulo(w/2, h/2 + 6, texto, t.tinta, 15, 4.6))
+    return envoltura(w, h, c, seda(t))
+
+
+# ---------------------------------------------------------------- separador
+def separador(t, w=ANCHO, h=64):
+    c = (encaje(30, w - 30, h/2 - 2, t.filete if not t.oscuro else ROSA_VIEJO,
+                paso=24, alto=8, opacidad=0.9) +
+         f'<g transform="translate({w/2},{h/2-18}) scale(0.62)">'
+         f'{lazo(t.acento if not t.oscuro else ROSA_VIEJO, 2.1)}</g>')
+    # los separadores son lo único sin fondo propio, así que se adaptan al tema
+    estilo = ('<style>@media (prefers-color-scheme:dark){'
+              f'path,ellipse{{stroke:{ROSA_PALO}}}circle{{fill:{ROSA_PALO}}}'
+              '}</style>')
+    return envoltura(w, h, c, estilo)
+
+
+# ---------------------------------------------------------------- bloque de texto
+def bloque(titulo, subtitulo, puntos, cita, t, w=ANCHO, h=None, tam_titulo=44):
+    h = h or 258 + len(puntos) * 40
+    sangria = 70 if w > 500 else 40
+    filas = "".join(
+        f'{filete(sangria, sangria + 26, 212 + i*40 - 6, t, 1)}'
+        f'<text x="{sangria + 42}" y="{212 + i*40}" font-family="{SANS}" font-size="19" '
+        f'fill="{t.tinta}" opacity="0.9">{p}</text>'
+        for i, p in enumerate(puntos))
+    c = (marco_base(w, h, t) +
+         f'<g transform="translate({w/2},62) scale(0.7)">{lazo(t.acento, 2.2)}</g>' +
+         f'<text x="{w/2}" y="142" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="{tam_titulo}" letter-spacing="1.6" fill="{t.tinta}">{titulo}</text>' +
+         rotulo(w/2, 174, subtitulo, t.suave, 12, 3.2) + filas +
+         filete(w/2 - 80, w/2 + 80, h - 76, t) +
+         f'<text x="{w/2}" y="{h-42}" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="21" font-style="italic" fill="{t.acento}">{cita}</text>')
+    return envoltura(w, h, c, seda(t))
+
+
+# ---------------------------------------------------------------- ficha de modelo
+def comp_card(w=ANCHO, h=252):
+    """Al estilo de las tarjetas de composición que usan las agencias."""
+    datos = [("BASE", "Lima, Perú"), ("ALCANCE", "LATAM y España"),
+             ("IDIOMAS", "Español · Inglés"), ("SEÑA", "Pelirroja")]
+    cols = ""
+    for i, (k, v) in enumerate(datos):
+        cx = 26 + (w - 52) / 4 * i + (w - 52) / 8
+        if i:
+            cols += (f'<path d="M{26 + (w-52)/4*i:.1f} 152V212" stroke="{T_VINO.filete}" '
+                     f'stroke-width="1" opacity="0.55"/>')
+        cols += (rotulo(cx, 176, k, T_VINO.acento, 11.5, 3.4) +
+                 f'<text x="{cx:.1f}" y="204" text-anchor="middle" font-family="{SERIF}" '
+                 f'font-size="21" fill="{T_VINO.tinta}">{v}</text>')
+    c = (marco_base(w, h, T_VINO) +
+         rotulo(w/2, 64, "ficha de modelo", T_VINO.acento, 12.5, 4.6) +
+         f'<text x="{w/2}" y="116" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="44" letter-spacing="3" fill="{T_VINO.tinta}">MISS YERA</text>' +
+         filete(w/2 - 90, w/2 + 90, 136, T_VINO) + cols +
+         monograma(w - 46, h - 26, T_VINO.filete, 0.9, 0.75))
+    return envoltura(w, h, c, seda(T_VINO))
+
+
+# ---------------------------------------------------------------- placa del logotipo
+def placa_vino():
+    """Deriva la placa en vino desde placa-logo.svg, sin tocar el original.
+
+    El logotipo es un gradiente de fondo (id "g") con las letras en blanco
+    encima, así que basta con reemplazar las paradas del gradiente: el
+    lettering de la marca queda intacto y encima del vino resalta más.
+    """
+    base = open(os.path.join(OUT, "placa-logo.svg"), encoding="utf-8").read()
+    viejo = ('<stop offset="0%" stop-color="#FF8FC8"/>'
+             '<stop offset="50%" stop-color="#FF69B4"/>'
+             '<stop offset="100%" stop-color="#E0218A"/>')
+    if viejo not in base:
+        raise SystemExit("placa-logo.svg cambió: revisar las paradas del gradiente")
+    return base.replace(viejo,
+                        f'<stop offset="0%" stop-color="{FRAMBUESA}"/>'
+                        f'<stop offset="52%" stop-color="{VINO}"/>'
+                        f'<stop offset="100%" stop-color="{BORGONA}"/>')
 
 
 # ---------------------------------------------------------------- cierre
-def cierre(w=900, h=260):
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>
-<linearGradient id="c" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="{PETAL}"/><stop offset="50%" stop-color="{ROSE}"/><stop offset="100%" stop-color="{FLAMINGO}"/></linearGradient>
-<linearGradient id="in" x1="0" y1="0" x2="0.3" y2="1">
-<stop offset="0%" stop-color="{SNOW}"/><stop offset="100%" stop-color="{BLUSH}"/></linearGradient>
-<style>
-.fl{{animation:fl 5s ease-in-out infinite}}@keyframes fl{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-7px)}}}}
-.tw{{animation:tw 2.6s ease-in-out infinite}}.tw2{{animation:tw 2.6s ease-in-out 1.3s infinite}}
-@keyframes tw{{0%,100%{{opacity:.25;transform:scale(.8)}}50%{{opacity:1;transform:scale(1.12)}}}}
-</style>
-</defs>
-<rect x="6" y="6" width="{w-12}" height="{h-12}" rx="40" fill="url(#c)"/>
-<rect x="24" y="24" width="{w-48}" height="{h-48}" rx="30" fill="url(#in)" stroke="{SNOW}" stroke-width="3"/>
-<text x="{w/2}" y="94" text-anchor="middle" font-family="{FONT}" font-size="34" font-weight="bold" font-style="italic" fill="{MAGENTA}">Tu empresa ya tiene los datos.</text>
-<text x="{w/2}" y="136" text-anchor="middle" font-family="{FONT}" font-size="34" font-weight="bold" font-style="italic" fill="{HOT}">Yo pongo la inteligencia y el brillo.</text>
-<text x="{w/2}" y="180" text-anchor="middle" font-family="{FONT}" font-size="19" fill="{NAVY}">Consultoría, automatización y capacitación en IA, sin jerga y con humor.</text>
-<text x="{w/2}" y="212" text-anchor="middle" font-family="{FONT}" font-size="22" font-weight="bold" fill="{MAGENTA}">missyera.com</text>
-<g class="fl"><g transform="translate(96,120) scale(1.1)">{BOW.format(c=HOT, d=MAGENTA)}</g></g>
-<g class="fl"><g transform="translate({w-96},120) scale(1.1)">{BOW.format(c=HOT, d=MAGENTA)}</g></g>
-<g class="tw" style="transform-origin:64px 60px"><g transform="translate(64,52)">{SPARK.format(c=SNOW, o="0.95")}</g></g>
-<g class="tw2" style="transform-origin:{w-64}px 60px"><g transform="translate({w-64},52)">{SPARK.format(c=SNOW, o="0.95")}</g></g>
-<g class="tw2" style="transform-origin:64px {h-56}px"><g transform="translate(64,{h-64}) scale(0.8)">{SPARK.format(c=MAGENTA, o="0.7")}</g></g>
-<g class="tw" style="transform-origin:{w-64}px {h-56}px"><g transform="translate({w-64},{h-64}) scale(0.8)">{SPARK.format(c=MAGENTA, o="0.7")}</g></g>
-</svg>'''
+def cierre(w=ANCHO, h=276):
+    c = (marco_base(w, h, T_BORG) +
+         encaje(46, w - 46, h - 42, T_BORG.filete, opacidad=0.5) +
+         f'<g transform="translate({w/2},66) scale(0.78)">{lazo(T_BORG.acento, 2.2)}</g>' +
+         f'<text x="{w/2}" y="150" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="36" letter-spacing="1.2" fill="{T_BORG.tinta}">Tu empresa ya tiene los datos.</text>'
+         f'<text x="{w/2}" y="196" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="36" font-style="italic" letter-spacing="1.2" fill="{T_BORG.acento}">Yo pongo la inteligencia.</text>' +
+         filete(w/2 - 110, w/2 + 110, 220, T_BORG) +
+         rotulo(w/2, 248, "missyera.com", T_BORG.tinta, 16, 6))
+    return envoltura(w, h, c, seda(T_BORG))
 
 
-# ---------------------------------------------------------------- marco de foto
-def marco(titulo, w=900, h=64):
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0">
-<stop offset="0%" stop-color="{PETAL}"/><stop offset="50%" stop-color="{ROSE}"/><stop offset="100%" stop-color="{PETAL}"/></linearGradient></defs>
-<rect x="4" y="10" width="{w-8}" height="{h-20}" rx="22" fill="url(#m)" stroke="{FLAMINGO}" stroke-width="2.6"/>
-<text x="{w/2}" y="{h/2+8}" text-anchor="middle" font-family="{FONT}" font-size="22" font-weight="bold" font-style="italic" fill="{MAGENTA}">{titulo}</text>
-<g transform="translate(46,{h/2-8}) scale(0.42)">{BOW.format(c=HOT, d=MAGENTA)}</g>
-<g transform="translate({w-46},{h/2-8}) scale(0.42)">{BOW.format(c=HOT, d=MAGENTA)}</g>
-</svg>'''
+# ---------------------------------------------------------------- banner
+def banner(w=ANCHO, h=152):
+    c = (marco_base(w, h, T_FRAM) +
+         f'<text x="{w/2}" y="78" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="36" letter-spacing="1.4" fill="{T_FRAM.tinta}">Bienvenida a mi rinconcito rosa</text>' +
+         filete(w/2 - 120, w/2 + 120, 100, T_FRAM) +
+         rotulo(w/2, 126, "datos · inteligencia artificial · mucho cariño", T_FRAM.suave, 12.5, 3.4))
+    return envoltura(w, h, c, seda(T_FRAM))
 
 
 if __name__ == "__main__":
-    print("cabeceras de seccion")
-    write("sec-como.svg", seccion("Cómo trabajamos juntas"))
-    write("sec-servicios.svg", seccion("Lo que hago por tu empresa"))
+    print("separadores de encaje")
+    escribir("sep-encaje-claro.svg", separador(T_NUDE))
+    escribir("sep-encaje-oro.svg", separador(T_FRAM))
 
-    print("separador")
-    write("sep-corazones.svg", sep_corazones())
+    print("cabeceras, alternando tono para dar ritmo")
+    for nombre, titulo, t in [
+        ("sec-facetas.svg",        "Mis dos facetas",        T_FRAM),
+        ("sec-servicios.svg",      "Lo que hago por ti",     T_VINO),
+        ("sec-como.svg",           "Cómo trabajamos juntas", T_NUDE),
+        ("sec-fotos.svg",          "Mi mundo en rosa",       T_FRAM),
+        ("sec-calendarios.svg",    "Mis calendarios 2026",   T_VINO),
+        ("sec-ecosistema.svg",     "Mi ecosistema",          T_NUDE),
+        ("sec-juguetes.svg",       "Mis herramientas",       T_FRAM),
+        ("sec-redes.svg",          "Encuéntrame",            T_VINO),
+        ("sec-numeros.svg",        "Mis números en GitHub",  T_NUDE),
+        ("sec-contribuciones.svg", "Mis contribuciones",     T_FRAM),
+        ("sec-viborita.svg",       "La viborita rosa",       T_VINO),
+    ]:
+        escribir(nombre, seccion(titulo, t))
 
-    print("cifras")
-    write("banda-cifras.svg", cifras([
-        ("+200 mil", "pollitos y pollitas", "ya aprendieron conmigo"),
-        ("13", "años de experiencia", "convirtiendo datos en valor"),
-        ("+40 mil", "CVs analizados", "gratis con MissCV"),
-        ("0", "líneas de código", "que necesitas saber"),
+    print("bloques de texto")
+    escribir("sobre-mi.svg", bloque(
+        "Hola, soy Yera", "ingeniera industrial con mba · trece años en datos",
+        ["Enseño IA, ciencia de datos y análisis con humor y sin jerga",
+         "Más de 200 mil pollitos y pollitas ya aprendieron conmigo",
+         "Implemento IA, automatizaciones y dashboards con resultados medibles",
+         "Speaker en conferencias de tecnología, datos y mujeres en STEM",
+         "Modelo y anfitriona, con mi signature look pelirroja",
+         "Lima, Perú, con el corazón en toda LATAM"],
+        "“No necesitas saber programar, solo necesitas decidirte”", T_NUDE))
+
+    escribir("faceta-consultora.svg", bloque(
+        "La consultora", "ia · datos · automatización",
+        ["Consultoría en IA", "Automatización", "Análisis predictivo", "Capacitación"],
+        "“Tus datos ya saben la respuesta”", T_VINO, w=TARJETA, h=440, tam_titulo=36))
+    escribir("faceta-modelo.svg", bloque(
+        "La modelo", "campañas · editoriales · eventos",
+        ["Campañas y editoriales", "Anfitriona de marca", "Look pelirroja", "Castings"],
+        "“La misma que arma los modelos”", T_FRAM, w=TARJETA, h=440, tam_titulo=36))
+
+    escribir("placa-logo-vino.svg", placa_vino())
+    escribir("banner-frase.svg", banner())
+    escribir("comp-card.svg", comp_card())
+
+    print("cifras y ruta")
+    escribir("banda-cifras.svg", cifras([
+        ("+200 mil", "pollitos"),
+        ("13", "años en datos"),
+        ("+40 mil", "CVs analizados"),
+        ("0", "líneas de código"),
+    ]))
+    escribir("ruta-trabajo.svg", ruta([
+        ("Conversamos", "tu negocio"),
+        ("Diagnóstico", "quick wins"),
+        ("Implementamos", "lo que sirve"),
+        ("Aprenden", "tu equipo"),
     ]))
 
     print("tarjetas de servicio")
-    servicios = [
-        ("card-consultoria.svg",   "cerebro",   "Consultoría en IA",   ["Diagnóstico, quick wins y hoja de", "ruta de IA hecha para tu empresa."], HOT,      MAGENTA),
-        ("card-automatizacion.svg","engranaje", "Automatización",      ["Adiós tareas repetitivas, hola", "reportes y flujos inteligentes."],      FLAMINGO, MAGENTA),
-        ("card-agentes.svg",       "robot",     "Agentes de IA",       ["Asistentes virtuales que trabajan", "mientras tú duermes."],              LILAC,    MAGENTA),
-        ("card-predictivo.svg",    "grafico",   "Análisis predictivo", ["Dashboards y modelos que vuelven", "tu data en decisiones."],            MAGENTA,  MAGENTA),
-        ("card-capacitacion.svg",  "birrete",   "Capacitación en IA",  ["Tu equipo aprende haciendo, con", "casos reales de su industria."],      HOT,      MAGENTA),
-        ("card-speaker.svg",       "micro",     "Speaker y keynotes",  ["Charlas que hacen que la IA", "parezca fácil y hasta divertida."],       FLAMINGO, MAGENTA),
-        ("card-modelo.svg",        "camara",    "Modelo y anfitriona", ["Campañas, editoriales y eventos", "con mi signature look pelirroja."],   LILAC,    MAGENTA),
-    ]
-    for name, ic, t, ls, a, d in servicios:
-        write(name, card(ic, t, ls, a, d))
+    for nombre, rot, tit, lns, t in [
+        ("card-consultoria.svg",    "consultoría",    "Inteligencia Artificial", ["Diagnóstico, quick wins y hoja", "de ruta para tu empresa."],    T_VINO),
+        ("card-automatizacion.svg", "automatización", "Procesos sin fricción",   ["Adiós tareas repetitivas, hola", "flujos que se hacen solos."],  T_NUDE),
+        ("card-agentes.svg",        "agentes",        "Asistentes de IA",        ["Trabajan mientras tú duermes,", "responden como tu equipo."],   T_FRAM),
+        ("card-predictivo.svg",     "analítica",      "Análisis predictivo",     ["Modelos y dashboards que", "vuelven tu data en decisiones."],  T_NUDE),
+        ("card-capacitacion.svg",   "capacitación",   "Tu equipo aprende",       ["Aprenden haciendo, con casos", "reales de su industria."],      T_FRAM),
+        ("card-speaker.svg",        "escenario",      "Speaker y keynotes",      ["Charlas que hacen que la IA", "parezca fácil y divertida."],   T_VINO),
+        ("card-modelo.svg",         "cámara",         "Modelo y anfitriona",     ["Campañas, editoriales y eventos", "con mi look pelirroja."],    T_FRAM),
+    ]:
+        escribir(nombre, tarjeta(rot, tit, lns, t))
 
     print("tarjetas de ecosistema")
-    eco = [
-        ("eco-web.svg",      "globo",  "missyera.com",   ["Mi casa digital: consultoría,", "cursos, blog y recursos gratis."], MAGENTA,  MAGENTA),
-        ("eco-fullday.svg",  "cohete", "Full Day de IA", ["Aprende IA desde cero en un día,", "15 herramientas sin programar."], HOT,      MAGENTA),
-        ("eco-misscv.svg",   "cv",     "misscv.com",     ["Crea y analiza tu CV con IA,", "gratis y en minutos."],              FLAMINGO, MAGENTA),
-        ("eco-blog.svg",     "pluma",  "El blog",        ["Guías de IA y datos explicadas", "sin tecnicismos."],                LILAC,    MAGENTA),
-        ("eco-recursos.svg", "regalo", "Recursos gratis",["Calendarios, guías y plantillas", "de regalo para mis pollitos."],   HOT,      MAGENTA),
-    ]
-    for name, ic, t, ls, a, d in eco:
-        write(name, card(ic, t, ls, a, d))
+    for nombre, rot, tit, lns, t in [
+        ("eco-web.svg",      "mi casa digital", "missyera.com",    ["Consultoría, cursos, blog", "y recursos gratis."],       T_VINO),
+        ("eco-fullday.svg",  "curso estrella",  "Full Day de IA",  ["Aprende IA desde cero en un", "día, sin programar."],     T_NUDE),
+        ("eco-misscv.svg",   "gratis",          "misscv.com",      ["Crea y analiza tu CV con IA", "en minutos."],             T_FRAM),
+        ("eco-blog.svg",     "lectura",         "El blog",         ["Guías de IA y datos", "explicadas sin tecnicismos."],    T_NUDE),
+        ("eco-recursos.svg", "de regalo",       "Recursos gratis", ["Calendarios, guías y", "plantillas para mis pollitos."], T_VINO),
+    ]:
+        escribir(nombre, tarjeta(rot, tit, lns, t))
 
-    print("chips de redes")
-    redes = [
-        ("chip-tiktok.svg",    "tiktok",    "TikTok",    "@soymissyera", HOT),
-        ("chip-instagram.svg", "instagram", "Instagram", "@soymissyera", MAGENTA),
-        ("chip-youtube.svg",   "youtube",   "YouTube",   "@soymissyera", HOT),
-        ("chip-linkedin.svg",  "linkedin",  "LinkedIn",  "soymissyera",  MAGENTA),
-        ("chip-x.svg",         "x",         "X",         "@soymissyera", HOT),
-        ("chip-web.svg",       "web",       "Mi web",    "missyera.com", MAGENTA),
-    ]
-    for name, lg, red, handle, acc in redes:
-        write(name, chip_red(lg, red, handle, acc))
+    print("redes y calendarios")
+    for nombre, red, handle, t in [
+        ("chip-tiktok.svg",    "tiktok",    "@soymissyera", T_VINO),
+        ("chip-instagram.svg", "instagram", "@soymissyera", T_NUDE),
+        ("chip-youtube.svg",   "youtube",   "@soymissyera", T_FRAM),
+        ("chip-linkedin.svg",  "linkedin",  "soymissyera",  T_NUDE),
+        ("chip-x.svg",         "x",         "@soymissyera", T_FRAM),
+        ("chip-web.svg",       "mi web",    "missyera.com", T_VINO),
+    ]:
+        escribir(nombre, chip(red, handle, t))
 
-    print("botones de calendario")
-    write("btn-calendario-1.svg", boton_calendario("Edición 1", MAGENTA))
-    write("btn-calendario-2.svg", boton_calendario("Edición 2", HOT))
-    write("sec-calendarios.svg", seccion("Mis calendarios 2026"))
+    escribir("btn-calendario-1.svg", boton("Edición 1", T_VINO))
+    escribir("btn-calendario-2.svg", boton("Edición 2", T_FRAM))
 
-    print("ruta de trabajo")
-    write("ruta-trabajo.svg", ruta([
-        ("Conversamos", "Entiendo tu negocio y", "los dolores de verdad"),
-        ("Diagnóstico", "Detecto quick wins y", "priorizo por impacto"),
-        ("Implementamos", "Automatizaciones, modelos", "y dashboards que sirven"),
-        ("Aprenden", "Capacito a tu equipo para", "que no dependa de mí"),
-    ]))
-
-    print("cierre y marcos")
-    write("cta-final.svg", cierre())
-    write("marco-charlas.svg", marco("La consultora sobre el escenario"))
-    write("marco-calendario.svg", marco("La modelo, fotos de mis calendarios 2026"))
+    print("pies editoriales y cierre")
+    escribir("marco-charlas.svg", pie("miss yera · sobre el escenario", T_NUDE))
+    escribir("marco-calendario.svg", pie("miss yera · calendario 2026 · lima, perú", T_NUDE))
+    escribir("cta-final.svg", cierre())
     print("listo")
