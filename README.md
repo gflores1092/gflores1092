@@ -6,8 +6,7 @@
 
 <img src="assets/banda-cifras.svg" width="92%" alt="Más de 200 mil pollitos, 13 años de experiencia, más de 40 mil CVs analizados y cero líneas de código que necesitas saber"/>
 
-<a href="https://missyera.com/consultoria-ia/"><img src="https://img.shields.io/badge/%F0%9F%92%96%20Agenda%20tu%20diagn%C3%B3stico-consultor%C3%ADa%20en%20IA-E0218A?style=for-the-badge&labelColor=FFE9F5"/></a>
-<a href="https://missyera.com/cursos/full-day-ia/"><img src="https://img.shields.io/badge/%F0%9F%9A%80%20Aprende%20IA%20en%20un%20d%C3%ADa-Full%20Day%20de%20IA-FF69B4?style=for-the-badge&labelColor=FFE9F5"/></a>
+<a href="https://missyera.com/consultoria-ia/"><img src="assets/cta-diagnostico.svg" width="47%" alt="Agenda tu diagnóstico de consultoría en IA"/></a> <a href="https://missyera.com/cursos/full-day-ia/"><img src="assets/cta-fullday.svg" width="47%" alt="Full Day de IA: aprende en un día"/></a>
 
 <img src="assets/sep-encaje-claro.svg" width="92%" alt=""/>
 
@@ -15,7 +14,7 @@
 
 <img src="assets/banner-frase.svg" width="92%" alt="Bienvenida a mi rinconcito rosa"/>
 
-<img src="https://komarev.com/ghpvc/?username=gflores1092&color=FF69B4&style=for-the-badge&label=%F0%9F%90%A5+POLLITOS+QUE+PASARON+POR+AQU%C3%8D&labelColor=FFE9F5"/>
+<img src="https://komarev.com/ghpvc/?username=gflores1092&color=6E1435&style=for-the-badge&label=POLLITOS+QUE+PASARON+POR+AQU%C3%8D&labelColor=F7E7EC"/>
 
 <img src="assets/sobre-mi.svg" width="92%" alt="Hola, soy Yera"/>
 
@@ -31,12 +30,11 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 
 <img src="assets/faceta-consultora.svg" width="47%" alt="La consultora"/> <img src="assets/faceta-modelo.svg" width="47%" alt="La modelo"/>
 
-<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-08.webp" height="185" alt="Miss Yera"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-09.webp" height="185" alt="Miss Yera"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-10.webp" height="185" alt="Miss Yera"/>
+<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-09.webp" height="230" alt="Miss Yera"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-10.webp" height="230" alt="Miss Yera"/>
 
 <img src="assets/comp-card.svg" width="92%" alt="Ficha de modelo: Miss Yera, base en Lima Perú, alcance LATAM y España, español e inglés, seña pelirroja"/>
 
-<a href="https://missyera.com/consultoria-ia/"><img src="https://img.shields.io/badge/%F0%9F%A7%A0%20Trabajemos%20juntos-consultor%C3%ADa%20en%20IA-FF69B4?style=for-the-badge&labelColor=FFE9F5"/></a>
-<a href="https://missyera.com/modelo/"><img src="https://img.shields.io/badge/%F0%9F%93%B7%20Mi%20portafolio-modelo%20y%20anfitriona-E0218A?style=for-the-badge&labelColor=FFE9F5"/></a>
+<a href="https://missyera.com/consultoria-ia/"><img src="assets/cta-consultoria.svg" width="47%" alt="Trabajemos juntos: consultoría en IA"/></a> <a href="https://missyera.com/modelo/"><img src="assets/cta-portafolio.svg" width="47%" alt="Mi portafolio de modelo y anfitriona"/></a>
 
 <img src="assets/sep-encaje-oro.svg" width="92%" alt=""/>
 
@@ -66,11 +64,29 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 
 <img src="assets/marco-calendario.svg" width="92%" alt="La modelo, fotos de mis calendarios 2026"/>
 
-<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-02.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-03.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-04.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-05.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-06.webp" height="200" alt="Miss Yera, calendario 2026"/>
-
-<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-07.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-08.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-09.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-10.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-11.webp" height="200" alt="Miss Yera, calendario 2026"/>
-
-<img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-12.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-13.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-14.webp" height="200" alt="Miss Yera, calendario 2026"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-15.webp" height="200" alt="Miss Yera, calendario 2026"/>
+<table>
+<tr>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-02.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-03.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-04.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-05.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-06.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+</tr>
+<tr>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-07.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-08.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-09.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-10.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-11.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+</tr>
+<tr>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-12.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-13.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-14.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-1/miss-yera-cal1-15.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+<td width="20%" align="center"><img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-08.webp" width="100%" alt="Miss Yera, calendario 2026"/></td>
+</tr>
+</table>
 
 <img src="assets/sep-encaje-oro.svg" width="92%" alt=""/>
 
@@ -105,15 +121,7 @@ Dos ediciones completas y cero costo. Son mi regalo para mis pollitos 💗
 
 <img src="assets/sec-juguetes.svg" width="92%" alt="Mis herramientas"/>
 
-<img src="https://img.shields.io/badge/Python-FF69B4?style=for-the-badge&logo=python&logoColor=E0218A&labelColor=FFE9F5"/>
-<img src="https://img.shields.io/badge/SQL-E0218A?style=for-the-badge&logo=postgresql&logoColor=E0218A&labelColor=FFE9F5"/>
-<img src="https://img.shields.io/badge/Power%20BI-FF8FC8?style=for-the-badge&logo=googleanalytics&logoColor=E0218A&labelColor=FFE9F5"/>
-<img src="https://img.shields.io/badge/Excel-DDA0DD?style=for-the-badge&logo=googlesheets&logoColor=E0218A&labelColor=FFE9F5"/>
-<br/>
-<img src="https://img.shields.io/badge/Machine%20Learning-FF69B4?style=for-the-badge&logo=scikitlearn&logoColor=E0218A&labelColor=FFE9F5"/>
-<img src="https://img.shields.io/badge/IA%20Generativa-E0218A?style=for-the-badge&logo=openai&logoColor=E0218A&labelColor=FFE9F5"/>
-<img src="https://img.shields.io/badge/Claude-FF8FC8?style=for-the-badge&logo=anthropic&logoColor=E0218A&labelColor=FFE9F5"/>
-<img src="https://img.shields.io/badge/Git-DDA0DD?style=for-the-badge&logo=git&logoColor=E0218A&labelColor=FFE9F5"/>
+<img src="assets/herramientas.svg" width="92%" alt="Python, SQL, Power BI, Excel, Machine Learning, IA generativa, Claude y Git"/>
 
 <img src="assets/sep-encaje-oro.svg" width="92%" alt=""/>
 
@@ -186,11 +194,11 @@ Una viborita se come mis contribuciones todos los días, porque hasta mis bichos
 
 <img src="assets/cta-final.svg" width="92%" alt="Tu empresa ya tiene los datos, yo pongo la inteligencia y el brillo. missyera.com"/>
 
-<a href="https://missyera.com/consultoria-ia/"><img src="https://img.shields.io/badge/%F0%9F%92%96%20Agenda%20tu%20diagn%C3%B3stico-hablemos%20de%20tu%20empresa-E0218A?style=for-the-badge&labelColor=FFE9F5"/></a>
+<a href="https://missyera.com/consultoria-ia/"><img src="assets/cta-diagnostico.svg" width="47%" alt="Agenda tu diagnóstico"/></a>
 
 <img src="assets/pollito.svg" width="145" alt="Pollito de Miss Yera"/>
 
-<img src="https://img.shields.io/badge/%F0%9F%90%A5%20Si%20llegaste%20hasta%20aqu%C3%AD-ya%20eres%20pollito%20honorario-FF69B4?style=for-the-badge&labelColor=FFE9F5"/>
+<img src="https://img.shields.io/badge/si%20llegaste%20hasta%20aqu%C3%AD-ya%20eres%20pollito%20honorario-6E1435?style=for-the-badge&labelColor=F7E7EC"/>
 
 <img src="https://readme-typing-svg.demolab.com/?font=Pacifico&size=26&duration=3600&pause=1000&color=E0218A&center=true&vCenter=true&width=520&lines=Chau,+chau.+Bye,+bye." alt="Chau chau bye bye"/>
 

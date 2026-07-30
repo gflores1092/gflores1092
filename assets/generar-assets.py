@@ -196,12 +196,114 @@ def ruta(pasos, w=ANCHO, h=244):
     return envoltura(w, h, c, seda(T_NUDE))
 
 
-# ---------------------------------------------------------------- chip de red
-def chip(red, handle, t, w=TARJETA, h=114):
+
+# ---------------------------------------------------------------- iconos de marca
+# Glifos dibujados a mano en caja de 24x24, para no depender de shields.io y
+# poder teñirlos con la paleta. Trazo abierto salvo donde el logo pide macizo.
+GLIFOS = {
+    "python": lambda c: (
+        f'<g fill="{c}"><path d="M11.9 1.6c-.9 0-1.7.1-2.4.2-2.2.4-2.6 1.2-2.6 2.6v1.9h5.2v.7H4.9'
+        f'c-1.5 0-2.8.9-3.2 2.6-.5 1.9-.5 3.1 0 5.1.4 1.5 1.2 2.6 2.7 2.6h1.8v-2.3c0-1.7 1.5-3.2 3.2-3.2'
+        f'h5.2c1.4 0 2.6-1.2 2.6-2.6V4.4c0-1.4-1.2-2.4-2.6-2.7-.9-.1-1.8-.2-2.7-.1zM9.1 3.2'
+        f'c.5 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z"/>'
+        f'<path d="M18.6 7v2.3c0 1.8-1.5 3.3-3.2 3.3h-5.2c-1.4 0-2.6 1.2-2.6 2.6v4.9c0 1.4 1.2 2.2 2.6 2.6'
+        f'1.6.5 3.2.6 5.2 0 1.3-.4 2.6-1.1 2.6-2.6v-1.9h-5.2v-.7h7.8c1.5 0 2.1-1.1 2.6-2.6.5-1.6.5-3.1 0-5.1'
+        f'-.4-1.5-1.1-2.6-2.6-2.6h-2zm-2.9 12.6c.5 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z" opacity="0.62"/></g>'),
+    "sql": lambda c: (
+        f'<g fill="none" stroke="{c}" stroke-width="1.9">'
+        f'<ellipse cx="12" cy="5.6" rx="7.6" ry="3.1"/>'
+        f'<path d="M4.4 5.6v12.8c0 1.7 3.4 3.1 7.6 3.1s7.6-1.4 7.6-3.1V5.6"/>'
+        f'<path d="M4.4 12c0 1.7 3.4 3.1 7.6 3.1s7.6-1.4 7.6-3.1"/></g>'),
+    "powerbi": lambda c: (
+        f'<rect x="3.4" y="13" width="4.6" height="8.2" rx="1.2" fill="{c}" opacity="0.6"/>'
+        f'<rect x="9.7" y="7.6" width="4.6" height="13.6" rx="1.2" fill="{c}" opacity="0.82"/>'
+        f'<rect x="16" y="2.8" width="4.6" height="18.4" rx="1.2" fill="{c}"/>'),
+    "excel": lambda c: (
+        f'<g fill="none" stroke="{c}" stroke-width="1.8">'
+        f'<rect x="3" y="4" width="18" height="16" rx="2.4"/>'
+        f'<path d="M3 9.2h18M3 14.6h18M9.4 4v16M15.2 4v16"/></g>'
+        f'<rect x="3" y="4" width="18" height="5.2" rx="2.4" fill="{c}" opacity="0.35"/>'),
+    "ml": lambda c: (
+        f'<g stroke="{c}" stroke-width="1.4" opacity="0.7">'
+        f'<path d="M5 6.4 12 7.4M5 6.4 12 16.6M5 17.6 12 7.4M5 17.6 12 16.6M12 7.4 19 12M12 16.6 19 12"/></g>'
+        f'<g fill="{c}"><circle cx="4.6" cy="6.4" r="2.3"/><circle cx="4.6" cy="17.6" r="2.3"/>'
+        f'<circle cx="12" cy="7.4" r="2.3"/><circle cx="12" cy="16.6" r="2.3"/>'
+        f'<circle cx="19.4" cy="12" r="2.3"/></g>'),
+    "ia": lambda c: (
+        f'<path d="M12 1.8 14 9.2 21.4 11.2 14 13.2 12 20.6 10 13.2 2.6 11.2 10 9.2z" fill="{c}"/>'
+        f'<path d="M19 16.4 19.8 19 22.4 19.8 19.8 20.6 19 23.2 18.2 20.6 15.6 19.8 18.2 19z" '
+        f'fill="{c}" opacity="0.7"/>'),
+    "claude": lambda c: (
+        f'<g stroke="{c}" stroke-width="2.1" stroke-linecap="round">'
+        f'<path d="M12 3.2v17.6M4.4 7.6l15.2 8.8M19.6 7.6 4.4 16.4"/></g>'),
+    "git": lambda c: (
+        f'<g stroke="{c}" stroke-width="1.9" fill="none">'
+        f'<path d="M6.4 8.6v7.6"/><path d="M6.4 12.4h5.2a2.6 2.6 0 0 0 2.6-2.6V8.4"/></g>'
+        f'<g fill="{c}"><circle cx="6.4" cy="6" r="2.6"/><circle cx="6.4" cy="18.4" r="2.6"/>'
+        f'<circle cx="14.2" cy="6" r="2.6"/></g>'),
+    "tiktok": lambda c: (
+        f'<path d="M14.2 3h2.9c.2 1.5 1 2.8 2.2 3.6.8.5 1.6.8 2.5.9v2.9c-1.6-.1-3.1-.6-4.4-1.4v6.2'
+        f'c0 1.4-.5 2.8-1.4 3.8-1.4 1.7-3.8 2.3-5.8 1.7-2.3-.7-3.9-2.7-4-5.1-.1-2.5 1.7-4.9 4.1-5.4'
+        f'.8-.2 1.7-.2 2.5 0v3c-1.3-.5-2.8.2-3.3 1.5-.5 1.2.1 2.7 1.3 3.3 1.3.6 2.9 0 3.4-1.4'
+        f'.1-.4.2-.7.2-1.1V3z" fill="{c}"/>'),
+    "instagram": lambda c: (
+        f'<g fill="none" stroke="{c}" stroke-width="2.1">'
+        f'<rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.6"/>'
+        f'<circle cx="12" cy="12" r="4.5"/></g><circle cx="17.5" cy="6.5" r="1.5" fill="{c}"/>'),
+    "youtube": lambda c: (
+        f'<rect x="1.8" y="5" width="20.4" height="14" rx="4.4" fill="{c}"/>'
+        f'<path d="M10 8.9 15.8 12 10 15.1z" fill="{NIEVE}"/>'),
+    "linkedin": lambda c: (
+        f'<rect x="2.8" y="2.8" width="18.4" height="18.4" rx="4.4" fill="{c}"/>'
+        f'<circle cx="7.4" cy="7.6" r="1.8" fill="{NIEVE}"/>'
+        f'<rect x="5.9" y="10.4" width="3" height="8" fill="{NIEVE}"/>'
+        f'<path d="M11.4 18.4v-8h2.9v1.1c.6-.9 1.6-1.4 2.7-1.3 2 0 3.2 1.3 3.2 3.7v4.5h-3v-4'
+        f'c0-1.1-.4-1.8-1.4-1.8-.9 0-1.4.6-1.4 1.8v4z" fill="{NIEVE}"/>'),
+    "x": lambda c: (
+        f'<path d="M3.2 3h5.4l4.2 5.7L17.9 3h2.9l-6.5 7.6L21.4 21H16l-4.5-6.1L6 21H3.1l7-8.1z" fill="{c}"/>'),
+    "web": lambda c: (
+        f'<g fill="none" stroke="{c}" stroke-width="2">'
+        f'<circle cx="12" cy="12" r="9.2"/><ellipse cx="12" cy="12" rx="4.1" ry="9.2"/>'
+        f'<path d="M3 9h18M3 15h18"/></g>'),
+}
+
+
+def herramientas(filas, w=ANCHO):
+    """Muro de herramientas con los logos dibujados, en vez de badges de texto."""
+    cols = max(len(f) for f in filas)
+    cw = (w - 60) / cols
+    alto_fila = 128
+    h = 56 + alto_fila * len(filas)
+    piezas = ""
+    for r, fila in enumerate(filas):
+        y = 44 + alto_fila * r
+        sobra = (cols - len(fila)) * cw / 2
+        for i, (glifo, nombre) in enumerate(fila):
+            cx = 30 + sobra + cw * i + cw / 2
+            piezas += (f'<g transform="translate({cx-22:.1f},{y}) scale(1.85)">'
+                       f'{GLIFOS[glifo](T_VINO.suave)}</g>'
+                       + rotulo(cx, y + 76, nombre, T_VINO.tinta, 12.5, 2.4))
+    return envoltura(w, h, marco_base(w, h, T_VINO) + piezas, seda(T_VINO))
+
+
+def boton_cta(rotulo_txt, titulo, t, w=TARJETA, h=124):
+    """Botón de llamada a la acción, en el mismo lenguaje que el resto."""
     c = (marco_base(w, h, t) +
-         rotulo(w/2, h/2 - 10, red, t.acento, 12.5, 4.2) +
-         f'<text x="{w/2}" y="{h/2+26}" text-anchor="middle" font-family="{SERIF}" '
-         f'font-size="26" letter-spacing="0.6" fill="{t.tinta}">{handle}</text>')
+         rotulo(w/2, 48, rotulo_txt, t.acento, 12, 4) +
+         f'<text x="{w/2}" y="88" text-anchor="middle" font-family="{SERIF}" '
+         f'font-size="28" letter-spacing="0.8" fill="{t.tinta}">{titulo}</text>' +
+         filete(w/2 - 40, w/2 + 40, 104, t))
+    return envoltura(w, h, c, seda(t))
+
+
+# ---------------------------------------------------------------- chip de red
+def chip(glifo, red, handle, t, w=TARJETA, h=118):
+    c = (marco_base(w, h, t) +
+         f'<g transform="translate(34,{h/2-23}) scale(1.9)">{GLIFOS[glifo](t.acento)}</g>'
+         f'<text x="104" y="{h/2-6}" font-family="{SANS}" font-size="12.5" '
+         f'letter-spacing="4.2" fill="{t.suave}">{red.upper()}</text>'
+         f'<text x="104" y="{h/2+28}" font-family="{SERIF}" font-size="27" '
+         f'letter-spacing="0.6" fill="{t.tinta}">{handle}</text>')
     return envoltura(w, h, c, seda(t))
 
 
@@ -406,15 +508,25 @@ if __name__ == "__main__":
         escribir(nombre, tarjeta(rot, tit, lns, t))
 
     print("redes y calendarios")
-    for nombre, red, handle, t in [
-        ("chip-tiktok.svg",    "tiktok",    "@soymissyera", T_VINO),
-        ("chip-instagram.svg", "instagram", "@soymissyera", T_NUDE),
-        ("chip-youtube.svg",   "youtube",   "@soymissyera", T_FRAM),
-        ("chip-linkedin.svg",  "linkedin",  "soymissyera",  T_NUDE),
-        ("chip-x.svg",         "x",         "@soymissyera", T_FRAM),
-        ("chip-web.svg",       "mi web",    "missyera.com", T_VINO),
+    for nombre, glifo, red, handle, t in [
+        ("chip-tiktok.svg",    "tiktok",    "tiktok",    "@soymissyera", T_VINO),
+        ("chip-instagram.svg", "instagram", "instagram", "@soymissyera", T_NUDE),
+        ("chip-youtube.svg",   "youtube",   "youtube",   "@soymissyera", T_FRAM),
+        ("chip-linkedin.svg",  "linkedin",  "linkedin",  "soymissyera",  T_NUDE),
+        ("chip-x.svg",         "x",         "x",         "@soymissyera", T_FRAM),
+        ("chip-web.svg",       "web",       "mi web",    "missyera.com", T_VINO),
     ]:
-        escribir(nombre, chip(red, handle, t))
+        escribir(nombre, chip(glifo, red, handle, t))
+
+    print("herramientas y llamadas a la acción")
+    escribir("herramientas.svg", herramientas([
+        [("python", "Python"), ("sql", "SQL"), ("powerbi", "Power BI"), ("excel", "Excel")],
+        [("ml", "Machine Learning"), ("ia", "IA generativa"), ("claude", "Claude"), ("git", "Git")],
+    ]))
+    escribir("cta-diagnostico.svg", boton_cta("agenda conmigo", "Tu diagnóstico", T_VINO))
+    escribir("cta-fullday.svg", boton_cta("aprende en un día", "Full Day de IA", T_FRAM))
+    escribir("cta-consultoria.svg", boton_cta("trabajemos juntos", "Consultoría en IA", T_FRAM))
+    escribir("cta-portafolio.svg", boton_cta("mi portafolio", "Modelo y anfitriona", T_VINO))
 
     escribir("btn-calendario-1.svg", boton("Edición 1", T_VINO))
     escribir("btn-calendario-2.svg", boton("Edición 2", T_FRAM))
