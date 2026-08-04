@@ -90,6 +90,32 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 </tr>
 </table>
 
+<img src="assets/marco-fuera-de-camara.svg" width="92%" alt="Miss Yera, fuera de cámara"/>
+
+<table>
+<tr>
+<td width="20%" align="center"><img src="assets/fotos/retrato-blazer.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/retrato-blazer-negro.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/modelo-sillon.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/modelo-pasillo.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/modelo-primer-plano.jpeg" width="100%" alt="Miss Yera"/></td>
+</tr>
+<tr>
+<td width="20%" align="center"><img src="assets/fotos/modelo-orejas.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-colonial.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-parque.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-calle.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-escultura.jpeg" width="100%" alt="Miss Yera"/></td>
+</tr>
+<tr>
+<td width="20%" align="center"><img src="assets/fotos/vida-pinos.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-rio.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-piscina.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-amigas.jpeg" width="100%" alt="Miss Yera"/></td>
+<td width="20%" align="center"><img src="assets/fotos/vida-mascota.jpeg" width="100%" alt="Miss Yera"/></td>
+</tr>
+</table>
+
 <img src="assets/sep-encaje-oro.svg" width="92%" alt=""/>
 
 <img src="assets/sec-calendarios.svg" width="92%" alt="Mis calendarios 2026"/>
@@ -209,6 +235,20 @@ Empresas, universidades y congresos donde me han invitado a hablar de IA y datos
 <sub><b>Women in Data Science</b></sub>
 </td>
 <td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-women-in-tech-latam.jpeg" width="100%" alt="Miss Yera en Women in Tech LATAM Awards"/>
+<sub><b>Women in Tech LATAM Awards</b></sub>
+</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-women-techmakers.jpeg" width="100%" alt="Miss Yera en Women Techmakers Lima"/>
+<sub><b>Women Techmakers Lima</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-aisalon-lima.jpeg" width="100%" alt="Miss Yera en aiSalon Lima · Powering AI Connections"/>
+<sub><b>aiSalon Lima · Powering AI Connections</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
 <img src="assets/fotos/evento-peru-venture-capital.jpeg" width="100%" alt="Miss Yera en Perú Venture Capital · VCC25"/>
 <sub><b>Perú Venture Capital · VCC25</b></sub>
 </td>
@@ -223,22 +263,50 @@ Empresas, universidades y congresos donde me han invitado a hablar de IA y datos
 <sub><b>UNMSM · Ingeniería de Sistemas</b></sub>
 </td>
 <td width="33%" align="center" valign="top">
-<img src="assets/fotos/evento-ciideii.jpeg" width="100%" alt="Miss Yera en CIIDEII"/>
-<sub><b>CIIDEII</b></sub>
+<img src="assets/fotos/evento-cie-ingenieria-industrial.jpeg" width="100%" alt="Miss Yera en CIE · Facultad de Ingeniería Industrial"/>
+<sub><b>CIE · Facultad de Ingeniería Industrial</b></sub>
 </td>
 </tr>
 <tr>
 <td width="33%" align="center" valign="top">
-<img src="assets/fotos/charla-ingenieria-industrial.jpeg" width="100%" alt="Miss Yera en Ingeniería industrial, datos y tecnología"/>
-<sub><b>Ingeniería industrial, datos y tecnología</b></sub>
+<img src="assets/fotos/evento-ciideii.jpeg" width="100%" alt="Miss Yera en CIIDEII"/>
+<sub><b>CIIDEII</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-coneii-silatam.jpeg" width="100%" alt="Miss Yera en CONEII · SILATAM"/>
+<sub><b>CONEII · SILATAM</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-coneii-certificado.jpeg" width="100%" alt="Miss Yera en CONEII · reconocimiento"/>
+<sub><b>CONEII · reconocimiento</b></sub>
+</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-lead-upn.jpeg" width="100%" alt="Miss Yera en LEAD UPN · Liderando el futuro de los negocios"/>
+<sub><b>LEAD UPN · Liderando el futuro de los negocios</b></sub>
 </td>
 <td width="33%" align="center" valign="top">
 <img src="assets/fotos/charla-mujeres-en-ingenieria.jpeg" width="100%" alt="Miss Yera en LEAD Perú · Mujeres en ingeniería"/>
 <sub><b>LEAD Perú · Mujeres en ingeniería</b></sub>
 </td>
 <td width="33%" align="center" valign="top">
+<img src="assets/fotos/charla-ingenieria-industrial.jpeg" width="100%" alt="Miss Yera en Ingeniería industrial, datos y tecnología"/>
+<sub><b>Ingeniería industrial, datos y tecnología</b></sub>
+</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/charla-ia-y-seo.jpeg" width="100%" alt="Miss Yera en Aplicaciones con IA y SEO desde cero"/>
+<sub><b>Aplicaciones con IA y SEO desde cero</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
 <img src="assets/fotos/premio-mujeres-coraje.jpeg" width="100%" alt="Miss Yera en Mujeres Coraje · reconocimiento"/>
 <sub><b>Mujeres Coraje · reconocimiento</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-sala-conferencias.jpeg" width="100%" alt="Miss Yera en Formación a equipos"/>
+<sub><b>Formación a equipos</b></sub>
 </td>
 </tr>
 </table>

@@ -541,5 +541,6 @@ if __name__ == "__main__":
     print("pies editoriales y cierre")
     escribir("marco-charlas.svg", pie("miss yera · sobre el escenario", T_NUDE))
     escribir("marco-calendario.svg", pie("miss yera · calendario 2026 · lima, perú", T_NUDE))
+    escribir("marco-fuera-de-camara.svg", pie("miss yera · fuera de cámara", T_NUDE))
     escribir("cta-final.svg", cierre())
     print("listo")
