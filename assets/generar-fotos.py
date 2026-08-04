@@ -21,7 +21,7 @@ import os
 from PIL import Image
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-FOTOS = sorted(glob.glob(os.path.join(AQUI, "fotos", "*.jpeg")))
+DIR_FOTOS = os.path.join(AQUI, "fotos")
 
 NUDE, BLUSH, FRAMBUESA = "#F7E7EC", "#F2D9DF", "#9B2F55"
 VINO, BORGONA, ORO_C = "#6E1435", "#4A0C24", "#E3A886"
@@ -33,9 +33,9 @@ D_SOMBRA = (0.290, 0.047, 0.141)
 D_LUZ = (0.969, 0.906, 0.925)
 
 
-def incrustar(idx, ancho_max=620, calidad=80):
+def incrustar(nombre, ancho_max=620, calidad=80):
     """Reescala la foto y la devuelve como data URI."""
-    im = Image.open(FOTOS[idx]).convert("RGB")
+    im = Image.open(os.path.join(DIR_FOTOS, nombre + ".jpeg")).convert("RGB")
     if im.width > ancho_max:
         im = im.resize((ancho_max, round(im.height * ancho_max / im.width)), Image.LANCZOS)
     buf = io.BytesIO()
@@ -74,9 +74,9 @@ def escribir(nombre, cuerpo):
 
 
 # ---------------------------------------------------------------- portada
-def portada(idx, w=820, h=430):
+def portada(foto, w=820, h=430):
     """Cubierta de revista: campo de color a la izquierda, foto a la derecha."""
-    uri, _ = incrustar(idx, 620)
+    uri, _ = incrustar(foto, 620)
     fx, fy, fw, fh = 452, 16, 352, h - 32
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
 <defs>{defs_oro()}{filtro_duotono()}
@@ -107,9 +107,9 @@ def portada(idx, w=820, h=430):
 
 
 # ---------------------------------------------------------------- retrato
-def retrato(idx, rotulo_txt, titulo, lineas, cita, oscuro=True, w=380, h=470):
+def retrato(foto, rotulo_txt, titulo, lineas, cita, oscuro=True, w=380, h=470):
     """Tarjeta vertical con foto arriba y texto debajo."""
-    uri, _ = incrustar(idx, 480)
+    uri, _ = incrustar(foto, 480)
     fondo = VINO if oscuro else NUDE
     tinta = NUDE if oscuro else VINO
     suave = BLUSH if oscuro else "#C17C8C"
@@ -143,17 +143,47 @@ def retrato(idx, rotulo_txt, titulo, lineas, cita, oscuro=True, w=380, h=470):
 </svg>'''
 
 
+# ---------------------------------------------------------------- tira editorial
+def tira(fotos, rotulo_txt, titulo, w=820, h=360):
+    """Varias fotos en duotono, en fila, al modo de un desplegable de revista."""
+    hueco = 10
+    fw = (w - 26 - hueco * (len(fotos) - 1)) / len(fotos)
+    fh_ = h - 118
+    piezas, recortes, imagenes = "", "", ""
+    for i, foto in enumerate(fotos):
+        uri, _ = incrustar(foto, 360, 74)
+        x = 13 + (fw + hueco) * i
+        recortes += f'<clipPath id="r{i}"><rect x="{x:.1f}" y="13" width="{fw:.1f}" height="{fh_}"/></clipPath>'
+        imagenes += (f'<g clip-path="url(#r{i})"><image href="{uri}" x="{x:.1f}" y="13" '
+                     f'width="{fw:.1f}" height="{fh_}" preserveAspectRatio="xMidYMid slice" '
+                     f'filter="url(#duo)"/></g>'
+                     f'<rect x="{x:.1f}" y="13" width="{fw:.1f}" height="{fh_}" fill="none" '
+                     f'stroke="url(#oro)" stroke-width="1.2"/>')
+    piezas = imagenes
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
+<defs>{defs_oro()}{filtro_duotono()}{recortes}</defs>
+<rect width="{w}" height="{h}" fill="{VINO}"/>
+{piezas}
+{rotulo(w/2, h - 68, rotulo_txt, ORO_C, 12.5, 4.6, "middle")}
+<text x="{w/2}" y="{h-30}" text-anchor="middle" font-family="{SERIF}" font-size="30"
+      letter-spacing="1.4" fill="{NUDE}">{titulo}</text>
+</svg>'''
+
+
 if __name__ == "__main__":
     print("piezas con foto")
     # 26 = vestido vino sobre pared blanca, la más limpia de todas
-    escribir("hero-portada.svg", portada(26))
+    escribir("hero-portada.svg", portada("retrato-vestido-vino"))
     # 36 = escritorio con laptop y blazer  ·  28 = vestido largo, pared clara
     escribir("retrato-consultora.svg", retrato(
-        36, "la consultora", "Datos e IA",
+        "retrato-escritorio", "la consultora", "Datos e IA",
         ["Consultoría, automatización", "y análisis predictivo"],
         "“Tus datos ya saben la respuesta”", oscuro=True))
     escribir("retrato-modelo.svg", retrato(
-        28, "la modelo", "Frente a cámara",
+        "retrato-vestido-largo", "la modelo", "Frente a cámara",
         ["Campañas, editoriales,", "anfitriona y embajadora"],
         "“La misma que arma los modelos”", oscuro=False))
+    escribir("tira-editorial.svg", tira(
+        ["editorial-playa-1", "editorial-yate", "editorial-playa-2"],
+        "verano · lima, perú", "Fuera de la oficina"))
     print("listo")

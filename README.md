@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/placa-logo-vino.svg" width="92%" alt="Miss Yera"/>
+<img src="assets/hero-portada.svg" width="92%" alt="Miss Yera, consultora de IA y modelo. Convierto datos en decisiones y la IA en algo que no da miedo. Lima, Perú"/>
 
 <img src="https://readme-typing-svg.demolab.com/?font=Pacifico&size=27&duration=2800&pause=900&color=E0218A&center=true&vCenter=true&width=720&lines=Consultora+de+IA+y+modelo,+las+dos+soy+yo;No+necesitas+saber+programar,+solo+decidirte;Ense%C3%B1o+IA+y+datos+sin+jerga+y+con+humor" alt="Consultora de IA y modelo, las dos soy yo"/>
 
@@ -28,7 +28,7 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 
 <img src="assets/sec-facetas.svg" width="92%" alt="Mis dos facetas"/>
 
-<img src="assets/faceta-consultora.svg" width="47%" alt="La consultora"/> <img src="assets/faceta-modelo.svg" width="47%" alt="La modelo"/>
+<img src="assets/retrato-consultora.svg" width="47%" alt="La consultora: datos e IA, consultoría, automatización y análisis predictivo"/> <img src="assets/retrato-modelo.svg" width="47%" alt="La modelo: campañas, editoriales, anfitriona y embajadora"/>
 
 <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-09.webp" height="230" alt="Miss Yera"/> <img src="https://missyera.com/static/media/recursos/galeria/calendario-miss-yera-2026-2/miss-yera-cal2-10.webp" height="230" alt="Miss Yera"/>
 
@@ -61,6 +61,8 @@ Fundé **Miss Yera** para que la inteligencia artificial deje de dar miedo y emp
 <img src="assets/marco-charlas.svg" width="92%" alt="La consultora sobre el escenario"/>
 
 <img src="https://missyera.com/static/media/charlas/charlas-background.jpg" alt="Miss Yera dando una charla sobre inteligencia artificial" width="62%"/>
+
+<img src="assets/tira-editorial.svg" width="92%" alt="Miss Yera fuera de la oficina, verano en Lima, Perú"/>
 
 <img src="assets/marco-calendario.svg" width="92%" alt="La modelo, fotos de mis calendarios 2026"/>
 
@@ -189,6 +191,57 @@ Una viborita se come mis contribuciones todos los días, porque hasta mis bichos
 <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gflores1092/gflores1092/output/snake-dark.svg"/>
 <img src="https://raw.githubusercontent.com/gflores1092/gflores1092/output/snake.svg" alt="Viborita rosa comiendo contribuciones" width="100%"/>
 </picture>
+
+<img src="assets/sep-encaje-claro.svg" width="92%" alt=""/>
+
+<img src="assets/sec-eventos.svg" width="92%" alt="Dónde he estado"/>
+
+Empresas, universidades y congresos donde me han invitado a hablar de IA y datos.
+
+<table>
+<tr>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-nttdata-ai-summit.jpeg" width="100%" alt="Miss Yera en NTT DATA · Digital &amp; AI Summit Lima"/>
+<sub><b>NTT DATA · Digital &amp; AI Summit Lima</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-women-in-data-science.jpeg" width="100%" alt="Miss Yera en Women in Data Science"/>
+<sub><b>Women in Data Science</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-peru-venture-capital.jpeg" width="100%" alt="Miss Yera en Perú Venture Capital · VCC25"/>
+<sub><b>Perú Venture Capital · VCC25</b></sub>
+</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-peru-lider-2026.jpeg" width="100%" alt="Miss Yera en Perú Líder 2026 · Congreso Internacional"/>
+<sub><b>Perú Líder 2026 · Congreso Internacional</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-unmsm-ingenieria-sistemas.jpeg" width="100%" alt="Miss Yera en UNMSM · Ingeniería de Sistemas"/>
+<sub><b>UNMSM · Ingeniería de Sistemas</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/evento-ciideii.jpeg" width="100%" alt="Miss Yera en CIIDEII"/>
+<sub><b>CIIDEII</b></sub>
+</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/charla-ingenieria-industrial.jpeg" width="100%" alt="Miss Yera en Ingeniería industrial, datos y tecnología"/>
+<sub><b>Ingeniería industrial, datos y tecnología</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/charla-mujeres-en-ingenieria.jpeg" width="100%" alt="Miss Yera en LEAD Perú · Mujeres en ingeniería"/>
+<sub><b>LEAD Perú · Mujeres en ingeniería</b></sub>
+</td>
+<td width="33%" align="center" valign="top">
+<img src="assets/fotos/premio-mujeres-coraje.jpeg" width="100%" alt="Miss Yera en Mujeres Coraje · reconocimiento"/>
+<sub><b>Mujeres Coraje · reconocimiento</b></sub>
+</td>
+</tr>
+</table>
 
 <img src="assets/sep-encaje-oro.svg" width="92%" alt=""/>
 
