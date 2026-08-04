@@ -444,6 +444,7 @@ if __name__ == "__main__":
         ("sec-numeros.svg",        "Mis números en GitHub",  T_NUDE),
         ("sec-contribuciones.svg", "Mis contribuciones",     T_FRAM),
         ("sec-viborita.svg",       "La viborita rosa",       T_VINO),
+        ("sec-eventos.svg",        "Dónde he estado",        T_FRAM),
     ]:
         escribir(nombre, seccion(titulo, t))
 
