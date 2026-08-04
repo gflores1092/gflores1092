@@ -61,9 +61,15 @@ def escribir(nombre, cuerpo):
 
 
 # ---------------------------------------------------------------- motivos
-def defs_oro():
+def defs_oro(w=1000, h=1000):
+    """Oro rosa en coordenadas de usuario, no relativas a la caja del elemento.
+
+    Con las relativas por defecto, un trazo horizontal tiene caja de altura cero
+    y el SVG directamente no lo pinta: los filetes de oro eran invisibles.
+    """
     paradas = "".join(f'<stop offset="{o}" stop-color="{c}"/>' for o, c in ORO)
-    return f'<linearGradient id="oro" x1="0" y1="0" x2="1" y2="1">{paradas}</linearGradient>'
+    return (f'<linearGradient id="oro" gradientUnits="userSpaceOnUse" '
+            f'x1="0" y1="0" x2="{w}" y2="{h}">{paradas}</linearGradient>')
 
 
 def seda(t):
@@ -129,7 +135,7 @@ def marco_base(w, h, t):
 
 def envoltura(w, h, cuerpo, extra_defs=""):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" '
-            f'width="{w}" height="{h}"><defs>{defs_oro()}{extra_defs}</defs>{cuerpo}</svg>')
+            f'width="{w}" height="{h}"><defs>{defs_oro(w, h)}{extra_defs}</defs>{cuerpo}</svg>')
 
 
 # ---------------------------------------------------------------- cabecera de sección

@@ -14,9 +14,9 @@ reescalan antes de incrustar.
 Correlo con `python3 assets/generar-fotos.py` después de cambiar una foto.
 """
 import base64
-import glob
 import io
 import os
+import re
 
 from PIL import Image
 
@@ -54,8 +54,10 @@ def filtro_duotono(idg="duo"):
             f'</feComponentTransfer></filter>')
 
 
-def defs_oro(idg="oro"):
-    return (f'<linearGradient id="{idg}" x1="0" y1="0" x2="1" y2="1">'
+def defs_oro(w=1000, h=1000, idg="oro"):
+    """Oro rosa en coordenadas de usuario: ver la nota en generar-assets.py."""
+    return (f'<linearGradient id="{idg}" gradientUnits="userSpaceOnUse" '
+            f'x1="0" y1="0" x2="{w}" y2="{h}">'
             f'<stop offset="0%" stop-color="#F6D9C7"/><stop offset="32%" stop-color="#E3A886"/>'
             f'<stop offset="52%" stop-color="#F9E8DB"/><stop offset="74%" stop-color="#DFA184"/>'
             f'<stop offset="100%" stop-color="#EFC3AB"/></linearGradient>')
@@ -73,13 +75,47 @@ def escribir(nombre, cuerpo):
     print(f"  -> {nombre}  {os.path.getsize(ruta)//1024} KB")
 
 
+# ---------------------------------------------------------------- logotipo
+# Caja del lettering dentro del lienzo 900x340 de placa-logo.svg, medida
+# renderizando el grupo aislado y buscando los píxeles pintados.
+LOGO_CAJA = (275, 57, 626, 253)
+
+
+def logotipo(x, y, alto):
+    """Devuelve el lettering de la marca, extraído de placa-logo.svg.
+
+    Se lee del original en cada ejecución en vez de copiarlo, para que el
+    logotipo tenga una sola fuente de verdad: si algún día se retoca la placa,
+    la portada se actualiza sola.
+    """
+    fuente = io.open(os.path.join(AQUI, "placa-logo.svg"), encoding="utf-8").read()
+    marca = '<g transform="translate(171.2,-94.5) scale(0.5)">'
+    if marca not in fuente:
+        raise SystemExit("placa-logo.svg cambió: no encuentro el grupo del lettering")
+    ini = fuente.index(marca)
+    prof, i = 0, ini
+    while True:
+        m = re.compile(r"</?g\b[^>]*>").search(fuente, i)
+        etiqueta = m.group(0)
+        prof += -1 if etiqueta.startswith("</") else (0 if etiqueta.endswith("/>") else 1)
+        i = m.end()
+        if prof == 0:
+            break
+    grupo = fuente[ini:i]
+    x0, y0, x1, y1 = LOGO_CAJA
+    k = alto / (y1 - y0)
+    return (f'<g transform="translate({x - x0*k:.2f},{y - y0*k:.2f}) scale({k:.4f})">'
+            f'{grupo}</g>'), (x1 - x0) * k
+
+
 # ---------------------------------------------------------------- portada
 def portada(foto, w=820, h=430):
     """Cubierta de revista: campo de color a la izquierda, foto a la derecha."""
     uri, _ = incrustar(foto, 620)
     fx, fy, fw, fh = 452, 16, 352, h - 32
+    marca, ancho_marca = logotipo(58, 100, 150)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>{defs_oro()}{filtro_duotono()}
+<defs>{defs_oro(w, h)}{filtro_duotono()}
 <clipPath id="rec"><rect x="{fx}" y="{fy}" width="{fw}" height="{fh}"/></clipPath>
 <linearGradient id="fundido" x1="0" y1="0" x2="1" y2="0">
 <stop offset="0%" stop-color="{VINO}" stop-opacity="0.92"/>
@@ -96,13 +132,12 @@ def portada(foto, w=820, h=430):
 <rect x="{fx}" y="{fy}" width="{fw}" height="{fh}" fill="url(#fundido)"/>
 </g>
 <rect x="{fx}" y="{fy}" width="{fw}" height="{fh}" fill="none" stroke="url(#oro)" stroke-width="1.4"/>
-{rotulo(58, 128, "consultora de ia · modelo", ORO_C, 13.5, 5.6)}
-<text x="58" y="212" font-family="{SERIF}" font-size="66" letter-spacing="5" fill="{NUDE}">MISS</text>
-<text x="58" y="282" font-family="{SERIF}" font-size="66" letter-spacing="5" fill="{NUDE}">YERA</text>
-<path d="M58 314H392" stroke="url(#oro)" stroke-width="1.4"/>
-<text x="58" y="352" font-family="{SANS}" font-size="19" fill="{BLUSH}">Convierto datos en decisiones</text>
-<text x="58" y="378" font-family="{SANS}" font-size="19" fill="{BLUSH}">y la IA en algo que no da miedo.</text>
-{rotulo(58, 410, "lima, perú · latam", ORO_C, 12, 4.2)}
+{rotulo(58, 78, "consultora de ia · modelo", ORO_C, 13.5, 5.6)}
+{marca}
+<path d="M58 302H{58 + max(ancho_marca, 260):.0f}" stroke="url(#oro)" stroke-width="1.4"/>
+<text x="58" y="340" font-family="{SANS}" font-size="19" fill="{BLUSH}">Convierto datos en decisiones</text>
+<text x="58" y="366" font-family="{SANS}" font-size="19" fill="{BLUSH}">y la IA en algo que no da miedo.</text>
+{rotulo(58, 400, "lima, perú · latam", ORO_C, 12, 4.2)}
 </svg>'''
 
 
@@ -120,7 +155,7 @@ def retrato(foto, rotulo_txt, titulo, lineas, cita, oscuro=True, w=380, h=470):
         f'font-size="18" fill="{tinta}" opacity="0.88">{ln}</text>'
         for i, ln in enumerate(lineas))
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>{defs_oro()}{filtro_duotono()}
+<defs>{defs_oro(w, h)}{filtro_duotono()}
 <clipPath id="rec"><rect x="13" y="13" width="{w-26}" height="{fh_}"/></clipPath>
 <linearGradient id="fundido" x1="0" y1="0" x2="0" y2="1">
 <stop offset="55%" stop-color="{fondo}" stop-opacity="0"/>
@@ -161,7 +196,7 @@ def tira(fotos, rotulo_txt, titulo, w=820, h=360):
                      f'stroke="url(#oro)" stroke-width="1.2"/>')
     piezas = imagenes
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
-<defs>{defs_oro()}{filtro_duotono()}{recortes}</defs>
+<defs>{defs_oro(w, h)}{filtro_duotono()}{recortes}</defs>
 <rect width="{w}" height="{h}" fill="{VINO}"/>
 {piezas}
 {rotulo(w/2, h - 68, rotulo_txt, ORO_C, 12.5, 4.6, "middle")}
